@@ -11,13 +11,13 @@ public class Segment {
 
     public  Segment(double x1, double y1,double x2, double y2){
         p1= new Pin(x1,y1);
-        p2= new Pin(x1,y1);
+        p2= new Pin(x2,y2);
         color=Color.black;
     }
 
     public  Segment(double x1, double y1,double x2, double y2,Color color){
         p1= new Pin(x1,y1);
-        p2= new Pin(x1,y1);
+        p2= new Pin(x2,y2);
         this.color=color;
     }
 

@@ -49,6 +49,28 @@ public class Rectagle extends Gobject {
     }
 
     @Override
+    protected void fillPositinalPins(List<Pin> pins) {
+        if(!complexForm){
+            pins.add(p1);
+            pins.add(p2);
+        }
+    }
+
+    @Override
+    protected void fillSegmentPins(List<Pin> pins) {
+        if (complexForm) {
+            topLine.fillSegmentPins(pins);
+            leftLine.fillSegmentPins(pins);
+            rightLine.fillSegmentPins(pins);
+            leftLine.fillSegmentPins(pins);
+        }
+    }
+
+    @Override
+    protected void fillSurfacePins(List<Pin> pins) {
+    }
+
+    @Override
     public void mill(int nParts) {
         if (complexForm) {
             genericMill(nParts);
@@ -57,7 +79,6 @@ public class Rectagle extends Gobject {
             genericMill(nParts);
         }
     }
-
 
 
     @Override
@@ -70,5 +91,25 @@ public class Rectagle extends Gobject {
             g.setColor(this.color);
             g.drawRect((int) p1.x, (int) p1.y, (int) (p2.x - p1.x), (int) (p2.y - p1.y));
         }
+    }
+
+    public Line getRightLine() {
+        if(!complexForm)disassemble();
+        return rightLine;
+    }
+
+    public Line getLeftLine() {
+        if(!complexForm)disassemble();
+        return leftLine;
+    }
+
+    public Line getTopLine() {
+        if(!complexForm)disassemble();
+        return topLine;
+    }
+
+    public Line getBottomLine() {
+        if(!complexForm)disassemble();
+        return bottomLine;
     }
 }

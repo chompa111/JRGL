@@ -1,6 +1,6 @@
 package elementary;
 
-import elementary.Pin;
+import tranformations.Transformation;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -53,7 +53,10 @@ public abstract class Gobject {
         }
     }
 
-    void transform(Transformation transformation){
+    public void transform(Transformation transformation,int milis){
+        transformation.transform(this,milis);
+    }
+    public void transform(Transformation transformation){
         transformation.transform(this);
     }
 
@@ -70,7 +73,9 @@ public abstract class Gobject {
         }
     }
 
-    public abstract void mill(int nParts);
+    public  void mill(int nParts){
+        genericMill(nParts);
+    }
 
     public void getsimpleBack() {
         complexForm = false;
@@ -78,5 +83,9 @@ public abstract class Gobject {
             chield.getsimpleBack();
         }
     }
-    public abstract void disassemble();
+    public void disassemble(){
+        for (Gobject chield : this.chields) {
+            chield.disassemble();
+        }
+    }
 }

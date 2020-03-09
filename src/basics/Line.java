@@ -15,10 +15,10 @@ public class Line extends Gobject {
     private List<Segment> complexSegments;
 
     public Line(double x1, double y1, double x2, double y2, Color color) {
-        Segment segment = new Segment(x1, y1, x2, y2, color);
+        this.segment = new Segment(x1, y1, x2, y2, color);
     }
     public Line(double x1, double y1, double x2, double y2) {
-        Segment segment = new Segment(x1, y1, x2, y2,Color.black);
+        this.segment = new Segment(x1, y1, x2, y2,Color.black);
     }
 
 
