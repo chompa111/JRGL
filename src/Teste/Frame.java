@@ -1,10 +1,9 @@
 package Teste;
 
-import basics.Line;
-import basics.Matrix;
-import basics.Rectagle;
+import basics.*;
 import elementary.Gobject;
 import tranformations.MoveTransform;
+import tranformations.PinPinSegmentTransfomation;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,20 +28,42 @@ public class Frame extends JFrame {
             while (true){
                 repaint();
                 try {
-                    Thread.sleep(20);
+                    Thread.sleep(10);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
         }).start();
+        gobjects.add(new FPSmesurer(550,70));
+        Circle circle= new Circle(200,200,80,Color.orange);
 
-        Matrix matrix= new Matrix(50,50,10,10,Color.pink);
-       // gobjects.add(matrix);
-        matrix.transform(new MoveTransform(200,100),2000);
-        p(2100);
+        Circle circle3= new Circle(230,230,60,Color.orange);
+        circle3.mill(0);
+        Circle circle4= new Circle(210,210,50,Color.orange);
+        circle4.mill(0);
+        circle.chields.add(circle3);
+        circle.chields.add(circle4);
 
-        matrix.rectagles()[5][2].transform(new MoveTransform(-200,-100),2000);
+        GroupGobject gg= new GroupGobject(circle3,circle4);
 
+        Circle circle2= new Circle(200,200,80,Color.orange);
+        circle2.mill(0);
+        circle.mill(30);
+        gobjects.add(circle);
+        Line line= new Line(400,420,400,100,Color.blue);
+        //gobjects.add(line);
+
+        Rectagle rectagle = new Rectagle(300,300,500,500,Color.pink);
+        rectagle.mill(10);
+        //circle.transform(new MoveTransform(200,0));
+        circle.mill(0);
+        line.mill(70);
+        p(900);
+        circle.transform(new PinPinSegmentTransfomation(line),450);
+        p(1900);
+        circle.transform(new PinPinSegmentTransfomation(gg),500);
+        p(1900);
+        circle.transform(new PinPinSegmentTransfomation(gg),500);
 
     }
 
@@ -65,7 +86,7 @@ public class Frame extends JFrame {
     private void paintComponent(Graphics g){
 
         ((Graphics2D)g).setStroke(new BasicStroke(3));
-        g.setColor(Color.white);
+        g.setColor(new Color(40,10,20));
         g.fillRect(0,0,700,700);
        for(int i=0;i<gobjects.size();i++){
            gobjects.get(i).paint(g);

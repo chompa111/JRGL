@@ -5,13 +5,11 @@ import elementary.Pin;
 import elementary.Segment;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 
-public class Rectagle extends Gobject {
+public class Rectagle extends ComplexableGobject {
 
     private boolean complexForm;
-    private Segment segment;
 
     Pin p1;
     Pin p2;
@@ -48,13 +46,7 @@ public class Rectagle extends Gobject {
         chields.add(bottomLine);
     }
 
-    @Override
-    protected void fillPositinalPins(List<Pin> pins) {
-        if(!complexForm){
-            pins.add(p1);
-            pins.add(p2);
-        }
-    }
+
 
     @Override
     protected void fillSegmentPins(List<Pin> pins) {
@@ -94,22 +86,31 @@ public class Rectagle extends Gobject {
     }
 
     public Line getRightLine() {
-        if(!complexForm)disassemble();
+        if (!complexForm) disassemble();
         return rightLine;
     }
 
     public Line getLeftLine() {
-        if(!complexForm)disassemble();
+        if (!complexForm) disassemble();
         return leftLine;
     }
 
     public Line getTopLine() {
-        if(!complexForm)disassemble();
+        if (!complexForm) disassemble();
         return topLine;
     }
 
     public Line getBottomLine() {
-        if(!complexForm)disassemble();
+        if (!complexForm) disassemble();
         return bottomLine;
+    }
+
+    @Override
+    public Color getColor() {
+        if (complexForm) {
+            return null;
+        } else{
+            return color;
+        }
     }
 }

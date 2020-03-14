@@ -5,8 +5,6 @@ import elementary.Pin;
 
 import java.util.List;
 
-import static tranformations.Transformation.STEPS;
-
 public class MoveTransform extends Transformation {
     double l;
     double h;

@@ -27,11 +27,14 @@ public class Line extends Gobject {
         this.complexForm = true;
         complexSegments = new ArrayList<>();
 
-        double deltaX = segment.p2.x - segment.p1.x;
-        double deltaY = segment.p2.y - segment.p1.y;
+        double deltaX = (segment.p2.x - segment.p1.x)/nParts;
+        double deltaY = (segment.p2.y - segment.p1.y)/nParts;
+        Pin initialPin= new Pin(segment.p1.x,segment.p1.y);
 
         for (int i = 0; i < nParts; i++) {
-            complexSegments.add(new Segment(segment.p1.x, segment.p1.y, segment.p1.x + (i * deltaX), segment.p1.y + (i * deltaY)));
+            Pin atualPin=new Pin(initialPin.x+deltaX,initialPin.y+deltaY);
+            complexSegments.add(new Segment(initialPin,atualPin,segment.color));
+            initialPin=atualPin;
         }
     }
 

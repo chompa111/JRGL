@@ -62,7 +62,7 @@ public abstract class Gobject {
 
     public void genericMill(int nParts){
         int nchield=this.chields.size();
-        int ratio=(int)(nParts+0.0/nchield+0.0);
+        int ratio=(int)((nParts+0.0)/(nchield+0.0));
         int remainder=nParts%nchield;
 
         for(int i=0;i<remainder;i++){
@@ -73,7 +73,7 @@ public abstract class Gobject {
         }
     }
 
-    public  void mill(int nParts){
+    public void mill(int nParts){
         genericMill(nParts);
     }
 
@@ -88,4 +88,9 @@ public abstract class Gobject {
             chield.disassemble();
         }
     }
+
+    public Color getColor(){
+        return null;
+    }
+
 }
