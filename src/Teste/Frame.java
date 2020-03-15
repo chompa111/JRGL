@@ -2,7 +2,6 @@ package Teste;
 
 import basics.*;
 import elementary.Gobject;
-import tranformations.MoveTransform;
 import tranformations.PinPinSegmentTransfomation;
 
 import javax.swing.*;
@@ -35,36 +34,16 @@ public class Frame extends JFrame {
             }
         }).start();
         gobjects.add(new FPSmesurer(550,70));
-        Circle circle= new Circle(200,200,80,Color.orange);
 
-        Circle circle3= new Circle(230,230,60,Color.orange);
-        circle3.mill(0);
-        Circle circle4= new Circle(210,210,50,Color.orange);
-        circle4.mill(0);
-        circle.chields.add(circle3);
-        circle.chields.add(circle4);
+        Rectagle rectagle = new Rectagle(200,200,400,400,Color.orange);
+        Circle circle= new Circle(300,300,100,Color.orange);
+        gobjects.add(rectagle);
 
-        GroupGobject gg= new GroupGobject(circle3,circle4);
-
-        Circle circle2= new Circle(200,200,80,Color.orange);
-        circle2.mill(0);
-        circle.mill(30);
-        gobjects.add(circle);
-        Line line= new Line(400,420,400,100,Color.blue);
-        //gobjects.add(line);
-
-        Rectagle rectagle = new Rectagle(300,300,500,500,Color.pink);
-        rectagle.mill(10);
-        //circle.transform(new MoveTransform(200,0));
-        circle.mill(0);
-        line.mill(70);
-        p(900);
-        circle.transform(new PinPinSegmentTransfomation(line),450);
-        p(1900);
-        circle.transform(new PinPinSegmentTransfomation(gg),500);
-        p(1900);
-        circle.transform(new PinPinSegmentTransfomation(gg),500);
-
+//        p(700);
+//        rectagle.transform(new PinPinSegmentTransfomation(circle),6000);
+       p(1000);
+        Matrix matrix = new Matrix(200,200,4,4,Color.orange);
+        rectagle.transform(new PinPinSegmentTransfomation(matrix));
     }
 
     void p(){

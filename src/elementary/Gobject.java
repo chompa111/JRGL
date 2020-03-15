@@ -9,9 +9,9 @@ import java.util.List;
 public abstract class Gobject {
 
     public boolean complexForm=false;
+    long id;
 
     public List<Gobject> chields= new ArrayList<>();
-    public List<Gobject> dads= new ArrayList<>();
 
     public List<Pin> getPositionalPins(){
         List<Pin> pins= new ArrayList<>();
@@ -29,7 +29,7 @@ public abstract class Gobject {
         fillSegmentPins(pins);
         return pins;
     }
-    protected void fillSegmentPins(List<Pin> pins){
+    public void fillSegmentPins(List<Pin> pins){
         for(Gobject chield:this.chields){
             chield.fillSegmentPins(pins);
         }
@@ -40,7 +40,7 @@ public abstract class Gobject {
         fillSurfacePins(pins);
         return pins;
     }
-    protected void fillSurfacePins(List<Pin> pins){
+    public void fillSurfacePins(List<Pin> pins){
         for(Gobject chield:this.chields){
             chield.fillSurfacePins(pins);
         }
@@ -60,21 +60,21 @@ public abstract class Gobject {
         transformation.transform(this);
     }
 
-    public void genericMill(int nParts){
+    public void genericDecompose(int nParts){
         int nchield=this.chields.size();
         int ratio=(int)((nParts+0.0)/(nchield+0.0));
         int remainder=nParts%nchield;
 
         for(int i=0;i<remainder;i++){
-            chields.get(i).mill(ratio+1);
+            chields.get(i).decompose(ratio+1);
         }
         for(int i=remainder;i<nchield;i++){
-            chields.get(i).mill(ratio);
+            chields.get(i).decompose(ratio);
         }
     }
 
-    public void mill(int nParts){
-        genericMill(nParts);
+    public void decompose(int nParts){
+        genericDecompose(nParts);
     }
 
     public void getsimpleBack() {
@@ -83,12 +83,13 @@ public abstract class Gobject {
             chield.getsimpleBack();
         }
     }
-    public void disassemble(){
+    public int disassemble(){
+        int sum=0;
         for (Gobject chield : this.chields) {
-            chield.disassemble();
+            sum+=chield.disassemble();
         }
+        return sum;
     }
-
     public Color getColor(){
         return null;
     }

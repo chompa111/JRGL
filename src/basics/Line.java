@@ -23,7 +23,7 @@ public class Line extends Gobject {
 
 
     @Override
-    public void mill(int nParts) {
+    public void decompose(int nParts) {
         this.complexForm = true;
         complexSegments = new ArrayList<>();
 
@@ -45,8 +45,8 @@ public class Line extends Gobject {
     }
 
     @Override
-    public void disassemble() {
-
+    public int disassemble() {
+        return 1;
     }
 
     @Override
@@ -54,7 +54,7 @@ public class Line extends Gobject {
     }
 
     @Override
-    protected void fillSegmentPins(List<Pin> pins) {
+    public void fillSegmentPins(List<Pin> pins) {
         if (complexForm) {
             for(Segment segment: complexSegments){
                 pins.add(segment.p1);
@@ -67,7 +67,7 @@ public class Line extends Gobject {
     }
 
     @Override
-    protected void fillSurfacePins(List<Pin> pins) {
+    public void fillSurfacePins(List<Pin> pins) {
     }
 
     @Override

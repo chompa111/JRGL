@@ -2,6 +2,7 @@ package tranformations;
 
 import elementary.Gobject;
 import elementary.Pin;
+import javafx.util.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +16,19 @@ public class PinPinSegmentTransfomation extends Transformation {
 
     @Override
     public void transform(Gobject go, int milis) {
+
+        int toGobjectSegments = toGobject.disassemble();
+        int fromGobjectSegments=go.disassemble();
+
+        if(toGobjectSegments<fromGobjectSegments){
+            toGobject.decompose(fromGobjectSegments);
+        }else{
+            go.decompose(toGobjectSegments);
+        }
+
         List<Pin> fromPins=go.getSegmentPins();
         List<Pin> toPins=toGobject.getSegmentPins();
+
 
         int size= Math.min(fromPins.size(), toPins.size());
         List<Double> doubleX=new ArrayList<>(size);
@@ -30,7 +42,7 @@ public class PinPinSegmentTransfomation extends Transformation {
         new Thread(() -> {
 
             int stepTime = milis / STEPS;
-            for (int i = 0; i <= STEPS; i++) {
+            for (int i = 0; i < STEPS; i++) {
                 try {
                     Thread.sleep(stepTime);
                 } catch (InterruptedException e) {

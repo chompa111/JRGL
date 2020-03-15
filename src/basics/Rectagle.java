@@ -2,14 +2,11 @@ package basics;
 
 import elementary.Gobject;
 import elementary.Pin;
-import elementary.Segment;
 
 import java.awt.*;
 import java.util.List;
 
-public class Rectagle extends ComplexableGobject {
-
-    private boolean complexForm;
+public class Rectagle extends SegmentableGobject {
 
     Pin p1;
     Pin p2;
@@ -33,7 +30,7 @@ public class Rectagle extends ComplexableGobject {
     }
 
     @Override
-    public void disassemble() {
+    public int disassemble() {
         complexForm = true;
         rightLine = new Line(p2.x, p1.y, p2.x, p2.y, this.color);
         leftLine = new Line(p1.x, p2.y, p1.x, p1.y, this.color);
@@ -41,44 +38,19 @@ public class Rectagle extends ComplexableGobject {
         bottomLine = new Line(p1.x, p2.y, p2.x, p2.y, this.color);
 
         chields.add(rightLine);
-        chields.add(leftLine);
         chields.add(topLine);
+        chields.add(leftLine);
         chields.add(bottomLine);
-    }
-
-
-
-    @Override
-    protected void fillSegmentPins(List<Pin> pins) {
-        if (complexForm) {
-            topLine.fillSegmentPins(pins);
-            leftLine.fillSegmentPins(pins);
-            rightLine.fillSegmentPins(pins);
-            leftLine.fillSegmentPins(pins);
-        }
-    }
-
-    @Override
-    protected void fillSurfacePins(List<Pin> pins) {
-    }
-
-    @Override
-    public void mill(int nParts) {
-        if (complexForm) {
-            genericMill(nParts);
-        } else {
-            disassemble();
-            genericMill(nParts);
-        }
+        return 4;
     }
 
 
     @Override
     public void paint(Graphics g) {
         if (complexForm) {
-            for (Gobject chield : this.chields) {
-                chield.paint(g);
-            }
+           for(int i=0;i<chields.size();i++){
+               chields.get(i).paint(g);
+           }
         } else {
             g.setColor(this.color);
             g.drawRect((int) p1.x, (int) p1.y, (int) (p2.x - p1.x), (int) (p2.y - p1.y));
