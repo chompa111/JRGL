@@ -23,9 +23,9 @@ public class Circle extends SegmentableGobject {
     public void paint(Graphics g) {
         if(!complexForm){
             double radio=centerPin.distanceTo(virtualBorderPin);
-            double m=radio/2;
+            double m=radio;
             g.setColor(this.color);
-            g.drawOval((int)(centerPin.x-m),(int)(centerPin.y-m),(int)m,(int)m);
+            g.drawOval((int)(centerPin.x-m),(int)(centerPin.y-m),(int)(2*m),(int)(2*m));
         }else{
             for(Segment segment: segments){
                 segment.paint(g);
@@ -56,7 +56,6 @@ public class Circle extends SegmentableGobject {
     @Override
     public void decompose(int nParts){
         segments = new ArrayList<>();
-        nParts+=30;
         double centeX=centerPin.x;
         double centerY=centerPin.y;
         double radio=centerPin.distanceTo(virtualBorderPin);

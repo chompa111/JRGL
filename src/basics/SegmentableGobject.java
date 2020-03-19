@@ -30,12 +30,9 @@ public class SegmentableGobject extends Gobject {
         }
     }
     @Override
-    public void fillSegmentPins(List<Pin> pins){
+    public void fillSegmentPins(List<Segment> pins){
         if(segments!=null) {
-            for (Segment segment : segments) {
-                pins.add(segment.p1);
-                pins.add(segment.p2);
-            }
+           pins.addAll(segments);
         }
         for(Gobject child:chields){
             child.fillSegmentPins(pins);

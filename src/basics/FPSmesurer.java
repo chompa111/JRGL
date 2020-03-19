@@ -27,6 +27,7 @@ public class FPSmesurer extends Gobject {
 
     @Override
     public void paint(Graphics g) {
+        g.setFont(new Font(Font.DIALOG,Font.ITALIC,20));
         refresh();
         if(fpsMean<=30)g.setColor(Color.red);
         if(fpsMean>30&& fpsMean<=45)g.setColor(Color.orange);

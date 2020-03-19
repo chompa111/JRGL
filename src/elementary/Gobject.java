@@ -24,12 +24,12 @@ public abstract class Gobject {
         }
     }
 
-    public List<Pin> getSegmentPins(){
-        List<Pin> pins= new ArrayList<>();
+    public List<Segment> getSegmentPins(){
+        List<Segment> pins= new ArrayList<>();
         fillSegmentPins(pins);
         return pins;
     }
-    public void fillSegmentPins(List<Pin> pins){
+    public void fillSegmentPins(List<Segment> pins){
         for(Gobject chield:this.chields){
             chield.fillSegmentPins(pins);
         }
@@ -63,13 +63,15 @@ public abstract class Gobject {
     public void genericDecompose(int nParts){
         int nchield=this.chields.size();
         int ratio=(int)((nParts+0.0)/(nchield+0.0));
-        int remainder=nParts%nchield;
+        if(chields.size()>0) {
+            int remainder = nParts % nchield;
 
-        for(int i=0;i<remainder;i++){
-            chields.get(i).decompose(ratio+1);
-        }
-        for(int i=remainder;i<nchield;i++){
-            chields.get(i).decompose(ratio);
+            for (int i = 0; i < remainder; i++) {
+                chields.get(i).decompose(ratio + 1);
+            }
+            for (int i = remainder; i < nchield; i++) {
+                chields.get(i).decompose(ratio);
+            }
         }
     }
 

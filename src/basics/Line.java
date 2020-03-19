@@ -54,15 +54,11 @@ public class Line extends Gobject {
     }
 
     @Override
-    public void fillSegmentPins(List<Pin> pins) {
+    public void fillSegmentPins(List<Segment> pins) {
         if (complexForm) {
-            for(Segment segment: complexSegments){
-                pins.add(segment.p1);
-                pins.add(segment.p2);
-            }
+            pins.addAll(complexSegments);
         } else {
-            pins.add(segment.p1);
-            pins.add(segment.p2);
+            pins.add(segment);
         }
     }
 

@@ -7,24 +7,25 @@ import tranformations.PinPinSegmentTransfomation;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Frame extends JFrame {
 
-    List<Gobject> gobjects= new ArrayList<>();
-    Image image= new BufferedImage(700,700,BufferedImage.TYPE_INT_RGB);
+    List<Gobject> gobjects = new ArrayList<>();
+    Image image = new BufferedImage(900, 900, BufferedImage.TYPE_INT_RGB);
 
 
+    public Frame() throws IOException, FontFormatException {
 
-    public Frame(){
-
-        setSize(700,700);
+        setSize(900, 900);
         setVisible(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        new Thread(()->{
-            while (true){
+        new Thread(() -> {
+            while (true) {
                 repaint();
                 try {
                     Thread.sleep(10);
@@ -33,20 +34,106 @@ public class Frame extends JFrame {
                 }
             }
         }).start();
-        gobjects.add(new FPSmesurer(550,70));
+        p(22000);
+        gobjects.add(new FPSmesurer(550, 70));
+        p(500);
 
-        Rectagle rectagle = new Rectagle(200,200,400,400,Color.orange);
-        Circle circle= new Circle(300,300,100,Color.orange);
-        gobjects.add(rectagle);
+        Text batata= new Text("bman",200,200,25);
+        gobjects.add(batata);
+        p(600);
+        Text frita= new Text("brunoYuji",200,200,25);
+        Text frita2= new Text("brunoYuji",200,200,25);
+        batata.transform(new PinPinSegmentTransfomation(frita));
+        p(600);
+        gobjects.add(frita2);
+        gobjects.remove(batata);
+        p(1000);
+        Circle circleN= new Circle(250,190,50,Color.white);
+        frita2.transform(new PinPinSegmentTransfomation(circleN),500);
+        p(600);
+        gobjects.add(circleN);
+        gobjects.remove(frita2);
+        p(1000);
 
-//        p(700);
-//        rectagle.transform(new PinPinSegmentTransfomation(circle),6000);
-       p(1000);
-        Matrix matrix = new Matrix(200,200,4,4,Color.orange);
-        rectagle.transform(new PinPinSegmentTransfomation(matrix));
+        circleN.transform(new PinPinSegmentTransfomation(new Text("chompinha",200,200,25)),500);
+        p(600);
+        Text chompinha=new Text("chompinha",200,200,25);
+        gobjects.add(chompinha);
+        gobjects.remove(circleN);
+        p(1000);
+        chompinha.transform(new PinPinSegmentTransfomation(new Matrix(100, 100, 6, 6, Color.MAGENTA)));
+        p(600);
+        Matrix matrix2=new Matrix(100, 100, 6, 6, Color.white);
+        gobjects.add(matrix2);
+        gobjects.remove(chompinha);
+        p(2000);
+        matrix2.transform(new PinPinSegmentTransfomation(new Text("f(x)=sin(x)+cos(3x)+ln(x)+log(8)",200,200,25)),500);
+        p(600);
+        gobjects.remove(matrix2);
+        Text formula=new Text("f(x)=sin(x)+cos(3x)+ln(x)+log(10)",200,200,25);
+        gobjects.add(formula);
+
+        GroupGobject grupo= new GroupGobject(new Circle(300,100,69,Color.white),
+                new Circle(500,300,169,Color.white),
+                new Circle(200,200,30,Color.white),
+                new Circle(600,500,80,Color.white)
+
+                );
+
+        p(1000);
+        formula.transform(new PinPinSegmentTransfomation(grupo),2000);
+
+
+
+
+
+        p(22000);
+        gobjects.add(new FPSmesurer(550, 70));
+        p(500);
+
+
+        Matrix matrix = new Matrix(100, 100, 4, 4, Color.MAGENTA);
+        gobjects.add(matrix);
+        List<Circle> circles = new ArrayList<>();
+        for (int i = 0; i < 16; i++) {
+            circles.add(new Circle(450, 100 + (i * 45), 20, Color.MAGENTA));
+        }
+        p(600);
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                matrix.rectagles[i][j].transform(new PinPinSegmentTransfomation(circles.get((i * 4) + j)));
+                p();
+            }
+        }
+
+        p(3000);
+        gobjects.remove(matrix);
+        GroupGobject gg = new GroupGobject(circles);
+        gobjects.add(gg);
+        Circle circle = new Circle(450, 450, 200, Color.MAGENTA);
+        gg.transform(new PinPinSegmentTransfomation(circle));
+
+        p(900);
+
+        gobjects.remove(gg);
+        gobjects.add(circle);
+
+        p(500);
+        circle.transform(new PinPinSegmentTransfomation(matrix));
+        p(600);
+        matrix = new Matrix(100, 100, 4, 4, Color.MAGENTA);
+        gobjects.add(matrix);
+        gobjects.remove(circle);
+
+        p(700);
+        matrix.transform(new PinPinSegmentTransfomation(new Line(600, 200, 600, 700, Color.magenta)));
+        p(600);
+        gobjects.remove(matrix);
+        gobjects.add(new Line(600, 200, 600, 700, Color.magenta));
+
     }
 
-    void p(){
+    void p() {
         try {
             Thread.sleep(200);
         } catch (InterruptedException e) {
@@ -54,7 +141,7 @@ public class Frame extends JFrame {
         }
     }
 
-    void p(int milis){
+    void p(int milis) {
         try {
             Thread.sleep(milis);
         } catch (InterruptedException e) {
@@ -62,24 +149,28 @@ public class Frame extends JFrame {
         }
     }
 
-    private void paintComponent(Graphics g){
+    private void paintComponent(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
 
-        ((Graphics2D)g).setStroke(new BasicStroke(3));
-        g.setColor(new Color(40,10,20));
-        g.fillRect(0,0,700,700);
-       for(int i=0;i<gobjects.size();i++){
-           gobjects.get(i).paint(g);
-       }
+        ((Graphics2D) g).setStroke(new BasicStroke(1.5f));
+        g.setColor(new Color(20, 10, 50));
+        g.fillRect(0, 0, 1700, 900);
+        for (int i = 0; i < gobjects.size(); i++) {
+            gobjects.get(i).paint(g);
+        }
     }
 
     @Override
-    public void paint(Graphics g){
+    public void paint(Graphics g) {
+
         paintComponent(image.getGraphics());
-        g.drawImage(image,0,0,this);
+        g.drawImage(image, 0, 0, this);
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, FontFormatException {
         new Frame();
     }
 }
