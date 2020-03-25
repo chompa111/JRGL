@@ -5,6 +5,7 @@ import elementary.Pin;
 import elementary.Segment;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,27 +16,33 @@ public class SegmentableGobject extends Gobject {
     List<Pin> positionalPins;
 
     @Override
-    public Color getColor() {
-        if(!complexForm){
-            return color;
-        }else {
-            return null;
+    public void fillColors(List<Color>colors) {
+        if (!complexForm) {
+            colors.add(color);
+        } else {
+            for (Segment segment:segments){
+                colors.add(segment.color);
+            }
+            for(Gobject child:chields){
+                child.fillColors(colors);
+            }
         }
     }
 
     @Override
     protected void fillPositinalPins(List<Pin> pins) {
         if (!complexForm) {
-           pins.addAll(positionalPins);
+            pins.addAll(positionalPins);
         }
     }
+
     @Override
-    public void fillSegmentPins(List<Segment> pins){
-        if(segments!=null) {
-           pins.addAll(segments);
+    public void fillSegments(List<Segment> segments) {
+        if (this.segments != null) {
+            segments.addAll(this.segments);
         }
-        for(Gobject child:chields){
-            child.fillSegmentPins(pins);
+        for (Gobject child : chields) {
+            child.fillSegments(segments);
         }
     }
 
@@ -49,7 +56,8 @@ public class SegmentableGobject extends Gobject {
         }
     }
 
-    void addPositionalPins(Pin... pins){
+    void addPositionalPins(Pin... pins) {
+        if (positionalPins == null) positionalPins = new ArrayList<>();
         positionalPins.addAll(Arrays.asList(pins));
     }
 

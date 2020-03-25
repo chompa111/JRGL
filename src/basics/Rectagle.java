@@ -1,10 +1,9 @@
 package basics;
 
-import elementary.Gobject;
 import elementary.Pin;
 
 import java.awt.*;
-import java.util.List;
+import java.util.ArrayList;
 
 public class Rectagle extends SegmentableGobject {
 
@@ -21,12 +20,14 @@ public class Rectagle extends SegmentableGobject {
     public Rectagle(double x1, double y1, double x2, double y2) {
         p1 = new Pin(x1, y1);
         p2 = new Pin(x2, y2);
+        addPositionalPins(p1,p2);
     }
 
     public Rectagle(double x1, double y1, double x2, double y2, Color color) {
         p1 = new Pin(x1, y1);
         p2 = new Pin(x2, y2);
         this.color = color;
+        addPositionalPins(p1,p2);
     }
 
     @Override
@@ -77,12 +78,5 @@ public class Rectagle extends SegmentableGobject {
         return bottomLine;
     }
 
-    @Override
-    public Color getColor() {
-        if (complexForm) {
-            return null;
-        } else{
-            return color;
-        }
-    }
+
 }

@@ -2,12 +2,12 @@ package Teste;
 
 import basics.*;
 import elementary.Gobject;
-import tranformations.PinPinSegmentTransfomation;
+import tranformations.TConvert;
+import tranformations.TMove;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +34,6 @@ public class Frame extends JFrame {
                 }
             }
         }).start();
-        p(22000);
         gobjects.add(new FPSmesurer(550, 70));
         p(500);
 
@@ -43,31 +42,31 @@ public class Frame extends JFrame {
         p(600);
         Text frita= new Text("brunoYuji",200,200,25);
         Text frita2= new Text("brunoYuji",200,200,25);
-        batata.transform(new PinPinSegmentTransfomation(frita));
+        batata.transform(new TConvert(frita));
         p(600);
         gobjects.add(frita2);
         gobjects.remove(batata);
         p(1000);
         Circle circleN= new Circle(250,190,50,Color.white);
-        frita2.transform(new PinPinSegmentTransfomation(circleN),500);
+        frita2.transform(new TConvert(circleN),500);
         p(600);
         gobjects.add(circleN);
         gobjects.remove(frita2);
         p(1000);
 
-        circleN.transform(new PinPinSegmentTransfomation(new Text("chompinha",200,200,25)),500);
+        circleN.transform(new TConvert(new Text("chompinha",200,200,25)),500);
         p(600);
         Text chompinha=new Text("chompinha",200,200,25);
         gobjects.add(chompinha);
         gobjects.remove(circleN);
         p(1000);
-        chompinha.transform(new PinPinSegmentTransfomation(new Matrix(100, 100, 6, 6, Color.MAGENTA)));
+        chompinha.transform(new TConvert(new Matrix(100, 100, 6, 6, Color.MAGENTA)));
         p(600);
         Matrix matrix2=new Matrix(100, 100, 6, 6, Color.white);
         gobjects.add(matrix2);
         gobjects.remove(chompinha);
         p(2000);
-        matrix2.transform(new PinPinSegmentTransfomation(new Text("f(x)=sin(x)+cos(3x)+ln(x)+log(8)",200,200,25)),500);
+        matrix2.transform(new TConvert(new Text("f(x)=sin(x)+cos(3x)+ln(x)+log(8)",200,200,25)),500);
         p(600);
         gobjects.remove(matrix2);
         Text formula=new Text("f(x)=sin(x)+cos(3x)+ln(x)+log(10)",200,200,25);
@@ -81,7 +80,9 @@ public class Frame extends JFrame {
                 );
 
         p(1000);
-        formula.transform(new PinPinSegmentTransfomation(grupo),2000);
+        formula.transform(new TConvert(grupo),2000);
+        p(2050);
+        formula.transform(new TMove(200,30));
 
 
 
@@ -101,7 +102,7 @@ public class Frame extends JFrame {
         p(600);
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                matrix.rectagles[i][j].transform(new PinPinSegmentTransfomation(circles.get((i * 4) + j)));
+                matrix.rectagles[i][j].transform(new TConvert(circles.get((i * 4) + j)));
                 p();
             }
         }
@@ -111,7 +112,7 @@ public class Frame extends JFrame {
         GroupGobject gg = new GroupGobject(circles);
         gobjects.add(gg);
         Circle circle = new Circle(450, 450, 200, Color.MAGENTA);
-        gg.transform(new PinPinSegmentTransfomation(circle));
+        gg.transform(new TConvert(circle));
 
         p(900);
 
@@ -119,14 +120,14 @@ public class Frame extends JFrame {
         gobjects.add(circle);
 
         p(500);
-        circle.transform(new PinPinSegmentTransfomation(matrix));
+        circle.transform(new TConvert(matrix));
         p(600);
         matrix = new Matrix(100, 100, 4, 4, Color.MAGENTA);
         gobjects.add(matrix);
         gobjects.remove(circle);
 
         p(700);
-        matrix.transform(new PinPinSegmentTransfomation(new Line(600, 200, 600, 700, Color.magenta)));
+        matrix.transform(new TConvert(new Line(600, 200, 600, 700, Color.magenta)));
         p(600);
         gobjects.remove(matrix);
         gobjects.add(new Line(600, 200, 600, 700, Color.magenta));

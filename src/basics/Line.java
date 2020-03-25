@@ -10,15 +10,16 @@ import java.util.List;
 
 public class Line extends Gobject {
 
-    private Segment segment;
+    public Segment segment;
 
     private List<Segment> complexSegments;
 
     public Line(double x1, double y1, double x2, double y2, Color color) {
         this.segment = new Segment(x1, y1, x2, y2, color);
     }
+
     public Line(double x1, double y1, double x2, double y2) {
-        this.segment = new Segment(x1, y1, x2, y2,Color.black);
+        this.segment = new Segment(x1, y1, x2, y2, Color.black);
     }
 
 
@@ -27,21 +28,21 @@ public class Line extends Gobject {
         this.complexForm = true;
         complexSegments = new ArrayList<>();
 
-        double deltaX = (segment.p2.x - segment.p1.x)/nParts;
-        double deltaY = (segment.p2.y - segment.p1.y)/nParts;
-        Pin initialPin= new Pin(segment.p1.x,segment.p1.y);
+        double deltaX = (segment.p2.x - segment.p1.x) / nParts;
+        double deltaY = (segment.p2.y - segment.p1.y) / nParts;
+        Pin initialPin = new Pin(segment.p1.x, segment.p1.y);
 
         for (int i = 0; i < nParts; i++) {
-            Pin atualPin=new Pin(initialPin.x+deltaX,initialPin.y+deltaY);
-            complexSegments.add(new Segment(initialPin,atualPin,segment.color));
-            initialPin=atualPin;
+            Pin atualPin = new Pin(initialPin.x + deltaX, initialPin.y + deltaY);
+            complexSegments.add(new Segment(initialPin, atualPin, segment.color));
+            initialPin = atualPin;
         }
     }
 
     @Override
     public void getsimpleBack() {
-        complexSegments=null;
-        complexForm=false;
+        complexSegments = null;
+        complexForm = false;
     }
 
     @Override
@@ -54,11 +55,11 @@ public class Line extends Gobject {
     }
 
     @Override
-    public void fillSegmentPins(List<Segment> pins) {
+    public void fillSegments(List<Segment> segments) {
         if (complexForm) {
-            pins.addAll(complexSegments);
+            segments.addAll(complexSegments);
         } else {
-            pins.add(segment);
+            segments.add(segment);
         }
     }
 
@@ -68,12 +69,22 @@ public class Line extends Gobject {
 
     @Override
     public void paint(Graphics g) {
-        if(complexForm){
-            for(Segment segment: complexSegments){
-                segment.paint(g);
+        if (complexForm) {
+            for (int i=0;i<complexSegments.size();i++){
+                complexSegments.get(i).paint(g);
             }
-        }else{
+//            for (Segment segment : complexSegments) {
+//                segment.paint(g);
+//            }
+        } else {
             this.segment.paint(g);
         }
     }
+
+    @Override
+    public void fillColors(List<Color> colors) {
+        colors.add(segment.color);
+    }
+
+
 }

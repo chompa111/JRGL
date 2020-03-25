@@ -24,14 +24,14 @@ public abstract class Gobject {
         }
     }
 
-    public List<Segment> getSegmentPins(){
-        List<Segment> pins= new ArrayList<>();
-        fillSegmentPins(pins);
-        return pins;
+    public List<Segment> getSegments(){
+        List<Segment> segments= new ArrayList<>();
+        fillSegments(segments);
+        return segments;
     }
-    public void fillSegmentPins(List<Segment> pins){
+    public void fillSegments(List<Segment> segments){
         for(Gobject chield:this.chields){
-            chield.fillSegmentPins(pins);
+            chield.fillSegments(segments);
         }
     }
 
@@ -92,8 +92,16 @@ public abstract class Gobject {
         }
         return sum;
     }
-    public Color getColor(){
-        return null;
+    public ArrayList<Color> getColors(){
+        ArrayList<Color> colors=new ArrayList<>();
+        fillColors(colors);
+        return colors;
+    }
+
+    public void fillColors(List<Color> colors){
+        for (Gobject chield : this.chields) {
+            chield.fillColors(colors);
+        }
     }
 
 }

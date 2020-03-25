@@ -14,8 +14,8 @@ public class Circle extends SegmentableGobject {
     public Circle(double x, double y,double radio,Color color) {
         centerPin=new Pin(x,y);
         virtualBorderPin= new Pin(x+radio,y);
-
         this.color = color;
+        addPositionalPins(centerPin,virtualBorderPin);
     }
 
 
