@@ -1,5 +1,7 @@
 package elementary;
 
+import tranformations.TConvert;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -63,7 +65,7 @@ public abstract class Scene extends JFrame {
                 RenderingHints.VALUE_ANTIALIAS_ON);
 
         ((Graphics2D) g).setStroke(new BasicStroke(1.5f));
-        g.setColor(new Color(20, 10, 50));
+        g.setColor(new Color(0, 0, 0));
         g.fillRect(0, 0, 1700, 900);
         for (int i = 0; i < gobjects.size(); i++) {
             gobjects.get(i).paint(g);
@@ -75,6 +77,14 @@ public abstract class Scene extends JFrame {
 
         paintComponent(image.getGraphics());
         g.drawImage(image, 0, 0, this);
+    }
+
+     public <T extends Gobject> T convert(Gobject a, T b,int milis){
+        a.transform(new TConvert(b),milis);
+        p(milis+20);
+        add(b);
+        remove(a);
+        return b;
     }
 
 }

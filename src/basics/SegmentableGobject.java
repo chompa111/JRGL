@@ -1,5 +1,6 @@
 package basics;
 
+import elementary.ColorHolder;
 import elementary.Gobject;
 import elementary.Pin;
 import elementary.Segment;
@@ -11,12 +12,12 @@ import java.util.List;
 
 public class SegmentableGobject extends Gobject {
 
-    public Color color;
-    List<Segment> segments;
+    public ColorHolder color;
+    List<Segment> segments=new ArrayList<>();
     List<Pin> positionalPins;
 
     @Override
-    public void fillColors(List<Color>colors) {
+    public void fillColors(List<ColorHolder>colors) {
         if (!complexForm) {
             colors.add(color);
         } else {

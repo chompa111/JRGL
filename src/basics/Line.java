@@ -1,5 +1,6 @@
 package basics;
 
+import elementary.ColorHolder;
 import elementary.Gobject;
 import elementary.Pin;
 import elementary.Segment;
@@ -34,7 +35,7 @@ public class Line extends Gobject {
 
         for (int i = 0; i < nParts; i++) {
             Pin atualPin = new Pin(initialPin.x + deltaX, initialPin.y + deltaY);
-            complexSegments.add(new Segment(initialPin, atualPin, segment.color));
+            complexSegments.add(new Segment(initialPin, atualPin, segment.color.color));
             initialPin = atualPin;
         }
     }
@@ -82,7 +83,7 @@ public class Line extends Gobject {
     }
 
     @Override
-    public void fillColors(List<Color> colors) {
+    public void fillColors(List<ColorHolder> colors) {
         colors.add(segment.color);
     }
 

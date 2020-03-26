@@ -1,5 +1,6 @@
 package basics;
 
+import elementary.ColorHolder;
 import elementary.Pin;
 import elementary.Segment;
 
@@ -14,7 +15,7 @@ public class Circle extends SegmentableGobject {
     public Circle(double x, double y,double radio,Color color) {
         centerPin=new Pin(x,y);
         virtualBorderPin= new Pin(x+radio,y);
-        this.color = color;
+        this.color = new ColorHolder(color);
         addPositionalPins(centerPin,virtualBorderPin);
     }
 
@@ -24,11 +25,12 @@ public class Circle extends SegmentableGobject {
         if(!complexForm){
             double radio=centerPin.distanceTo(virtualBorderPin);
             double m=radio;
-            g.setColor(this.color);
+            g.setColor(this.color.color);
             g.drawOval((int)(centerPin.x-m),(int)(centerPin.y-m),(int)(2*m),(int)(2*m));
         }else{
-            for(Segment segment: segments){
-                segment.paint(g);
+
+            for(int i=0;i<segments.size();i++){
+                segments.get(i).paint(g);
             }
         }
     }
@@ -36,7 +38,7 @@ public class Circle extends SegmentableGobject {
     @Override
     public int disassemble() {
         segments = new ArrayList<>();
-        int nParts=30;
+        int nParts=50;
         double centeX=centerPin.x;
         double centerY=centerPin.y;
         double radio=centerPin.distanceTo(virtualBorderPin);
@@ -46,11 +48,11 @@ public class Circle extends SegmentableGobject {
         Pin lastPin=new Pin(centeX+Math.cos(0)*radio,centerY+Math.sin(0)*radio);
         for(int i=1;i<=nParts;i++){
             Pin newPin=new Pin(centeX+Math.cos(step*i)*radio,centerY+Math.sin(step*i)*radio);
-            segments.add(new Segment(lastPin,newPin,this.color));
+            segments.add(new Segment(lastPin,newPin,this.color.color));
             lastPin=newPin;
         }
         complexForm=true;
-        return 30;
+        return 50;
     }
 
     @Override
@@ -65,7 +67,7 @@ public class Circle extends SegmentableGobject {
         Pin lastPin=new Pin(centeX+Math.cos(0)*radio,centerY+Math.sin(0)*radio);
         for(int i=1;i<=nParts;i++){
             Pin newPin=new Pin(centeX+Math.cos(step*i)*radio,centerY+Math.sin(step*i)*radio);
-            segments.add(new Segment(lastPin,newPin,this.color));
+            segments.add(new Segment(lastPin,newPin,this.color.color));
             lastPin=newPin;
         }
         complexForm=true;

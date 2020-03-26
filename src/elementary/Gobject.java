@@ -59,6 +59,27 @@ public abstract class Gobject {
     public void transform(Transformation transformation){
         transformation.transform(this);
     }
+    public void transformChields(Transformation transformation){
+        for(Gobject chield:chields){
+            chield.transform(transformation);
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void transformChields(Transformation transformation,int milis){
+        for(Gobject chield:chields){
+            chield.transform(transformation,milis);
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     public void genericDecompose(int nParts){
         int nchield=this.chields.size();
@@ -92,13 +113,13 @@ public abstract class Gobject {
         }
         return sum;
     }
-    public ArrayList<Color> getColors(){
-        ArrayList<Color> colors=new ArrayList<>();
+    public ArrayList<ColorHolder> getColors(){
+        ArrayList<ColorHolder> colors=new ArrayList<>();
         fillColors(colors);
         return colors;
     }
 
-    public void fillColors(List<Color> colors){
+    public void fillColors(List<ColorHolder> colors){
         for (Gobject chield : this.chields) {
             chield.fillColors(colors);
         }
