@@ -1,19 +1,15 @@
 package Teste;
 
 import basics.*;
-import elementary.Gobject;
 import elementary.Scene;
 import tranformations.TConvert;
-import tranformations.TMove;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 
-public class initAnimations extends Scene {
+public class Teste3 extends Scene {
     @Override
     public void execute() {
-        p(20000);
+       // p(20000);
         add(new FPSmesurer(700,100));
         p(1200);
           Text line =new Text("Guilherme_Bardeli",260,450,40);
@@ -35,6 +31,6 @@ public class initAnimations extends Scene {
     }
 
     public static void main(String[] args) {
-        new initAnimations();
+        new Teste3();
     }
 }

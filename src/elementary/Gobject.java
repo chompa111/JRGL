@@ -71,14 +71,16 @@ public abstract class Gobject {
     }
 
     public void transformChields(Transformation transformation,int milis){
-        for(Gobject chield:chields){
-            chield.transform(transformation,milis);
-            try {
-                Thread.sleep(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        new Thread(()->{
+            for(Gobject chield:chields){
+                chield.transform(transformation,milis);
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
-        }
+        }).start();
     }
 
     public void genericDecompose(int nParts){
@@ -123,6 +125,14 @@ public abstract class Gobject {
         for (Gobject chield : this.chields) {
             chield.fillColors(colors);
         }
+    }
+
+    public void init(){
+        new Thread(()-> {
+            for(Gobject chield: chields){
+                chield.init();
+            }
+        }).start();
     }
 
 }

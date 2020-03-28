@@ -75,4 +75,45 @@ public class TMove extends Transformation {
             }
         }).start();
     }
+
+    public void transform(List<Pin> pins, int milis) {
+
+        new Thread(() -> {
+
+            int stepTime = milis / STEPS;
+
+            double aL=(4*l)/(2*STEPS+(STEPS*STEPS));
+            double aH=(4*h)/(2*STEPS+(STEPS*STEPS));
+            double deltaL = 0;
+            double deltaH = 0;
+            for (int i = 0; i < STEPS/2; i++) {
+                try {
+                    Thread.sleep(stepTime);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                for (Pin pin : pins) {
+                    pin.x += deltaL;
+                    pin.y += deltaH;
+                }
+
+                deltaL+=aL;
+                deltaH+=aH;
+            }
+            for (int i = 0; i < STEPS/2; i++) {
+                try {
+                    Thread.sleep(stepTime);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                for (Pin pin : pins) {
+                    pin.x += deltaL;
+                    pin.y += deltaH;
+                }
+                deltaL-=aL;
+                deltaH-=aH;
+
+            }
+        }).start();
+    }
 }

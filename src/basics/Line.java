@@ -4,9 +4,12 @@ import elementary.ColorHolder;
 import elementary.Gobject;
 import elementary.Pin;
 import elementary.Segment;
+import tranformations.TMove;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class Line extends Gobject {
@@ -87,5 +90,13 @@ public class Line extends Gobject {
         colors.add(segment.color);
     }
 
+    @Override
+    public void init() {
+        Pin finalPin= new Pin(segment.p2);
+        segment.p2.x=segment.p1.x;
+        segment.p2.y=segment.p1.y;
 
+        new TMove(finalPin.x-segment.p1.x,finalPin.y-segment.p1.y).transform(Collections.singletonList(segment.p2),600);
+
+    }
 }

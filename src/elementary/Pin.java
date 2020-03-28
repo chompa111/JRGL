@@ -12,6 +12,11 @@ public class Pin {
         this.y = y;
     }
 
+    public Pin(Pin pin){
+        x=pin.x;
+        y=pin.y;
+    }
+
     public double distanceTo(Pin pin) {
         return Math.sqrt(((this.x - pin.x) * (this.x - pin.x)) + (this.y - pin.y) * (this.y - pin.y));
     }

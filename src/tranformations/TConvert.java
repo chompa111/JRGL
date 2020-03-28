@@ -49,6 +49,12 @@ public class TConvert extends Transformation {
         fromSeg.sort(Comparator.comparing(seg -> ang(minPinFromGobject, midPin(seg.p1, seg.p2))));
         toSeg.sort(Comparator.comparing(seg -> ang(minPinToGobject, midPin(seg.p1, seg.p2))));
 
+        try {
+            Thread.sleep(50);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         List<Pin> fromPins= Pin.getPinsFromSegments(fromSeg);
         List<Pin> toPins= Pin.getPinsFromSegments(toSeg);
 
@@ -130,9 +136,9 @@ public class TConvert extends Transformation {
 
     Double ang(Pin p1, Pin p2){
         double deltay=p1.y-p2.y;
-        double deltax=-(p1.x-p2.x);
+        double deltax=-(p1.x-p2.x)+0.0002;
 
-        double ratio=deltay/deltax;
+        double ratio=(deltay/deltax);
         if(deltax>=0 && deltay>0)
             return Math.atan(ratio);
         if(deltax<=0 && deltay>0)

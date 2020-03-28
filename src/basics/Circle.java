@@ -9,8 +9,8 @@ import java.util.ArrayList;
 
 public class Circle extends SegmentableGobject {
 
-    Pin centerPin;
-    Pin virtualBorderPin;
+    public Pin centerPin;
+    public Pin virtualBorderPin;
 
     public Circle(double x, double y,double radio,Color color) {
         centerPin=new Pin(x,y);

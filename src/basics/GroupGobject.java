@@ -14,4 +14,14 @@ public class GroupGobject extends Gobject {
     public GroupGobject(List gobjects) {
         chields.addAll(gobjects);
     }
+
+    public void add(Gobject... gobjects){
+        chields.addAll(Arrays.asList(gobjects));
+    }
+
+    public void add(Collection<Gobject> gobjects){
+        chields.addAll(gobjects);
+    }
+
+
 }

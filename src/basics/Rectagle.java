@@ -37,12 +37,12 @@ public class Rectagle extends SegmentableGobject {
         rightLine = new Line(p2.x, p1.y, p2.x, p2.y, this.color.color);
         leftLine = new Line(p1.x, p2.y, p1.x, p1.y, this.color.color);
         topLine = new Line(p1.x, p1.y, p2.x, p1.y, this.color.color);
-        bottomLine = new Line(p1.x, p2.y, p2.x, p2.y, this.color.color);
+        bottomLine = new Line(p2.x, p2.y, p1.x, p2.y, this.color.color);
 
-        chields.add(rightLine);
         chields.add(topLine);
-        chields.add(leftLine);
+        chields.add(rightLine);
         chields.add(bottomLine);
+        chields.add(leftLine);
         return 4;
     }
 
@@ -78,6 +78,5 @@ public class Rectagle extends SegmentableGobject {
         if (!complexForm) disassemble();
         return bottomLine;
     }
-
 
 }

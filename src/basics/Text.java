@@ -19,15 +19,16 @@ public class Text extends Gobject {
     static{
         GraphicsEnvironment ge =
                 GraphicsEnvironment.getLocalGraphicsEnvironment();
-        try {
-           font= Font.createFont(Font.TRUETYPE_FONT, new File("C://Users//gusta//Desktop//fonts//cmunbi.ttf"));
-            ge.registerFont(font);
-        } catch (FontFormatException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+//        try {
+//          // font= Font.createFont(Font.TRUETYPE_FONT, new File("C://Users//gusta//Desktop//fonts//cmunbi.ttf"));
+//           font=new Font(Font.DIALOG,Font.BOLD,20);
+//            ge.registerFont(font);
+//        } catch (FontFormatException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        font=new Font(Font.DIALOG,Font.BOLD,20);
     }
 
     public Text(String s,double x, double y,int size) {
