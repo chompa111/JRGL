@@ -27,12 +27,15 @@ public class Circle extends SegmentableGobject {
             double m=radio;
             g.setColor(this.color.color);
             g.drawOval((int)(centerPin.x-m),(int)(centerPin.y-m),(int)(2*m),(int)(2*m));
+         //   centerPin.paint(g);
+          //  virtualBorderPin.paint(g);
         }else{
 
             for(int i=0;i<segments.size();i++){
                 segments.get(i).paint(g);
             }
         }
+        super.paint(g);
     }
 
     @Override
@@ -52,7 +55,7 @@ public class Circle extends SegmentableGobject {
             lastPin=newPin;
         }
         complexForm=true;
-        return 50;
+        return 50+super.disassemble();
     }
 
     @Override
@@ -71,5 +74,11 @@ public class Circle extends SegmentableGobject {
             lastPin=newPin;
         }
         complexForm=true;
+    }
+
+    @Override
+    public void getsimpleBack() {
+        super.getsimpleBack();
+        segments=new ArrayList<>();
     }
 }

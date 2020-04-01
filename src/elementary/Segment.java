@@ -38,6 +38,9 @@ public class Segment {
     public void paint(Graphics g){
         g.setColor(this.color.color);
         g.drawLine((int)p1.x,(int)p1.y,(int)p2.x,(int)p2.y);
+
+        //p1.paint(g);
+       // p2.paint(g);
     }
 
 }

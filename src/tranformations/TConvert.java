@@ -1,6 +1,7 @@
 package tranformations;
 
 import basics.Line;
+import elementary.ColorHolder;
 import elementary.Gobject;
 import elementary.Pin;
 import elementary.Segment;
@@ -9,6 +10,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TConvert extends Transformation {
 
@@ -33,8 +35,8 @@ public class TConvert extends Transformation {
         List<Segment> toSeg=toGobject.getSegments();
 
 
-        Pin minPinFromGobject=midPin(maximalPin(Pin.getPinsFromSegments(fromSeg)), minimalPin(Pin.getPinsFromSegments(fromSeg)));
-        Pin minPinToGobject=midPin(maximalPin(Pin.getPinsFromSegments(toSeg)), minimalPin(Pin.getPinsFromSegments(toSeg)));
+        Pin minPinFromGobject=Pin.midPin(Pin.getPinsFromSegments(fromSeg));
+        Pin minPinToGobject=Pin.midPin(Pin.getPinsFromSegments(toSeg));
 
 //        fromSeg.sort((seg1,seg2)->{
 //            Double V1=seg1.p1.x+seg1.p1.y+seg1.p2.x+seg1.p2.y;
@@ -46,8 +48,21 @@ public class TConvert extends Transformation {
 //            Double V2=seg2.p1.x+seg2.p1.y+seg2.p2.x+seg2.p2.y;
 //            return V1.compareTo(V2);
 //        });
-        fromSeg.sort(Comparator.comparing(seg -> ang(minPinFromGobject, midPin(seg.p1, seg.p2))));
-        toSeg.sort(Comparator.comparing(seg -> ang(minPinToGobject, midPin(seg.p1, seg.p2))));
+        fromSeg.sort(Comparator.comparing(seg -> ang(minPinFromGobject, Pin.midPin(seg.p1, seg.p2))));
+        toSeg.sort(Comparator.comparing(seg -> ang(minPinToGobject, Pin.midPin(seg.p1, seg.p2))));
+        //fromSeg.sort(Comparator.comparing(Object::hashCode));
+
+        List<ColorHolder> colors=fromSeg.stream().map(segment ->segment.color).collect(Collectors.toList());
+
+        List<Double> acelerationRed=new ArrayList<>();
+        List<Double> acelerationGreen=new ArrayList<>();
+        List<Double> acelerationBlue=new ArrayList<>();
+
+        for(int i=0;i<colors.size();i++){
+            acelerationRed.add((4*(toSeg.get(i).color.color.getRed()-colors.get(i).color.getRed()+0.0))/(2*STEPS+(STEPS*STEPS)));
+            acelerationGreen.add((4*(toSeg.get(i).color.color.getGreen()-colors.get(i).color.getGreen()+0.0))/(2*STEPS+(STEPS*STEPS)));
+            acelerationBlue.add((4*(toSeg.get(i).color.color.getBlue()-colors.get(i).color.getBlue()+0.0))/(2*STEPS+(STEPS*STEPS)));
+        }
 
         try {
             Thread.sleep(50);
@@ -86,6 +101,9 @@ public class TConvert extends Transformation {
                     fromPins.get(j).x+=i*acelerationX.get(j);
                     fromPins.get(j).y+=i*acelerationY.get(j);
                 }
+                for(int j=0;j<size/2;j++){
+                    colors.get(j).change(i*acelerationRed.get(j),i*acelerationGreen.get(j),i*acelerationBlue.get(j));
+                }
             }
 
             for (int i = 0; i <= STEPS/2; i++) {
@@ -97,6 +115,10 @@ public class TConvert extends Transformation {
                 for(int j=0;j<size;j++){
                     fromPins.get(j).x+=((STEPS/2)-i)*acelerationX.get(j);
                     fromPins.get(j).y+=((STEPS/2)-i)*acelerationY.get(j);
+
+                }
+                for(int j=0;j<size/2;j++){
+                    colors.get(j).change(((STEPS/2)-i)*acelerationRed.get(j),((STEPS/2)-i)*acelerationGreen.get(j),((STEPS/2)-i)*acelerationBlue.get(j));
                 }
             }
             //resolving aproxproblems
@@ -113,26 +135,7 @@ public class TConvert extends Transformation {
         }).start();
     }
 
-    Pin minimalPin(List<Pin> list){
-        double minx=Double.MAX_VALUE;
-        double miny=Double.MAX_VALUE;
-        for(Pin pin :list){
-            minx=Math.min(minx,pin.x);
-            miny=Math.min(miny,pin.y);
-        }
 
-        return new Pin(minx,miny);
-    }
-    Pin maximalPin(List<Pin> list){
-        double minx=Double.MIN_VALUE;
-        double miny=Double.MIN_VALUE;
-        for(Pin pin :list){
-            minx=Math.max(minx,pin.x);
-            miny=Math.max(miny,pin.y);
-        }
-
-        return new Pin(minx,miny);
-    }
 
     Double ang(Pin p1, Pin p2){
         double deltay=p1.y-p2.y;
@@ -150,8 +153,6 @@ public class TConvert extends Transformation {
        return 0d;
     }
 
-    Pin midPin(Pin p1, Pin p2){
-        return new Pin((p1.x+p2.x)/2,(p1.y+p2.y)/2);
-    }
+
 
 }

@@ -6,7 +6,7 @@ import elementary.Pin;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Rectagle extends SegmentableGobject {
+public class Rectangle extends SegmentableGobject {
 
     Pin p1;
     Pin p2;
@@ -18,13 +18,13 @@ public class Rectagle extends SegmentableGobject {
 
 
 
-    public Rectagle(double x1, double y1, double x2, double y2) {
+    public Rectangle(double x1, double y1, double x2, double y2) {
         p1 = new Pin(x1, y1);
         p2 = new Pin(x2, y2);
         addPositionalPins(p1,p2);
     }
 
-    public Rectagle(double x1, double y1, double x2, double y2, Color color) {
+    public Rectangle(double x1, double y1, double x2, double y2, Color color) {
         p1 = new Pin(x1, y1);
         p2 = new Pin(x2, y2);
         this.color = new ColorHolder(color);
@@ -34,6 +34,11 @@ public class Rectagle extends SegmentableGobject {
     @Override
     public int disassemble() {
         complexForm = true;
+        chields.remove(topLine);
+        chields.remove(rightLine);
+        chields.remove(bottomLine);
+        chields.remove(leftLine);
+
         rightLine = new Line(p2.x, p1.y, p2.x, p2.y, this.color.color);
         leftLine = new Line(p1.x, p2.y, p1.x, p1.y, this.color.color);
         topLine = new Line(p1.x, p1.y, p2.x, p1.y, this.color.color);
@@ -56,6 +61,9 @@ public class Rectagle extends SegmentableGobject {
         } else {
             g.setColor(this.color.color);
             g.drawRect((int) p1.x, (int) p1.y, (int) (p2.x - p1.x), (int) (p2.y - p1.y));
+          //  g.fillRect((int) p1.x, (int) p1.y, (int) (p2.x - p1.x), (int) (p2.y - p1.y));
+           // p1.paint(g);
+           // p2.paint(g);
         }
     }
 

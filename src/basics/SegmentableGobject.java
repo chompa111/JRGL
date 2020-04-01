@@ -34,6 +34,7 @@ public class SegmentableGobject extends Gobject {
     protected void fillPositinalPins(List<Pin> pins) {
         if (!complexForm) {
             pins.addAll(positionalPins);
+            super.fillPositinalPins(pins);
         }
     }
 

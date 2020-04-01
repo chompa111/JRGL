@@ -1,5 +1,6 @@
 package basics;
 
+import elementary.ColorHolder;
 import elementary.Gobject;
 import elementary.Pin;
 import elementary.Segment;
@@ -9,12 +10,14 @@ import java.awt.font.FontRenderContext;
 import java.awt.font.GlyphVector;
 import java.awt.geom.PathIterator;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Gchar extends SegmentableGobject {
     int size;
     char aChar;
     Pin centerPin;
     Shape shape;
+
 
     void completeShape(){
         FontRenderContext frc = new FontRenderContext(null, true, true);
@@ -33,7 +36,7 @@ public class Gchar extends SegmentableGobject {
                 .next()) {
             i.currentSegment(coords);
             Pin nextPin = new Pin(coords[0] + centerPin.x, coords[1] + centerPin.y);
-            chields.add(new Line(firstPin.x, firstPin.y, nextPin.x, nextPin.y, Color.white));
+            chields.add(new Line(firstPin.x, firstPin.y, nextPin.x, nextPin.y, color.color));
             firstPin = nextPin;
         }
         complexForm=true;
@@ -45,14 +48,20 @@ public class Gchar extends SegmentableGobject {
         this.aChar = aChar;
         this.size=size;
         completeShape();
-
+        color=new ColorHolder(Color.white);
+        addPositionalPins(centerPin);
     }
 
     public Gchar(String s, double x, double y, int size) {
         centerPin = new Pin(x, y);
         aChar = s.charAt(0);
         completeShape();
+        color=new ColorHolder(Color.white);
+        addPositionalPins(centerPin);
+
     }
+
+
 
     public Rectangle getBounds(){
         return shape.getBounds();
@@ -60,14 +69,16 @@ public class Gchar extends SegmentableGobject {
 
     @Override
     public void paint(Graphics g) {
+        Rectangle rectangle=getBounds();
+
         if (complexForm) {
             for (Gobject gobject:chields){
                 gobject.paint(g);
             }
         } else {
-            g.setColor(Color.white);
+            g.setColor(color.color);
             g.setFont(Text.font.deriveFont((float) size));
-            g.drawString(aChar + "", (int) centerPin.x, (int) centerPin.y);
+            g.drawString(aChar + "", (int) centerPin.x-rectangle.x, (int) centerPin.y);
         }
     }
 }

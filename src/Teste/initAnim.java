@@ -53,22 +53,11 @@ public class initAnim extends Scene {
      p(2200);
      gg1.transform(new TColor(new Color(150,0,0)));
      gg2.transform(new TColor(new Color(0,150,0)));
-     p(200000);
 
-        for (int i=0;i<4;i++){
-            p(1100);
-            gg1.transformChields(new TMove(30,-30),1000);
-            gg2.transformChields(new TMove(-30,30),1000);
-            p(1100);
-            gg1.transformChields(new  TMove(-30,30),700);
-            gg2.transformChields(new TMove(30,-30),1000);
-            p(1100);
-            gg1.transformChields(new  TMove(30,-30),1000);
-            gg2.transformChields(new TMove(-30,30),1000);
-            p(1100);
-            gg1.transformChields(new TMove(-30,30),1000);
-            gg2.transformChields(new TMove(30,-30),1000);
-        }
+     p(2000);
+
+     convert(gg1,new Circle(200+200,200+200,100,new Color(150,0,0)),1000);
+     convert(gg2,new Circle(200+100+200,200+200,100,new Color(0,150,0)),1000);
 
 
     }

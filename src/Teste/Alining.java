@@ -21,7 +21,7 @@ public class Alining extends Scene {
         remove(line);
 
         p(2000);
-        matrix.transform(new TConvert(new Circle(450,450,200,Color.orange)),1000);
+        matrix.transform(new TConvert(new Circle(450,450,200,Color.orange)),15000);
 
     }
 

@@ -1,11 +1,13 @@
 package Teste;
 
 import basics.Circle;
+import basics.FPSmesurer;
 import basics.GroupGobject;
 import elementary.Scene;
 import tranformations.TColor;
 import tranformations.TConvert;
 import tranformations.TMove;
+import tranformations.TSize;
 
 import java.awt.*;
 
@@ -13,14 +15,18 @@ public class Recursao extends Scene {
     @Override
     public void execute() {
 
+        add(new FPSmesurer(200,200));
+
         for(int i=0;i<10;i++){
             Circle circle= new Circle(450,450,250, Color.MAGENTA);
             add(circle);
             GroupGobject gg= new GroupGobject();
             mitose(circle,5,gg);
-            gg.add(circle);
+           // gg.add(circle);
 
-            p(7000);
+            p(3900);
+            //gg.transform(new TSize(170),2000);
+           //p(2100);
             gg.transform(new TConvert(new Circle(450,450,250,Color.MAGENTA)),1000);
             p(1100);
             gg.chields.forEach(this::remove);
@@ -49,13 +55,15 @@ public class Recursao extends Scene {
             add(filho2);
             filho2.transform(new TColor(Color.MAGENTA));
             //filho1.transform(new TMove(((raioPai*fator)/2)-Math.random()*fator*raioPai,((raioPai*fator)/2)-Math.random()*fator*raioPai));
-            //filho2.transform(new TMove(((raioPai*fator)/2)-Math.random()*fator*raioPai,((raioPai*fator)/2)-Math.random()*fator*raioPai));
-            gg.add(filho1,filho2);
+           // filho2.transform(new TMove(((raioPai*fator)/2)-Math.random()*fator*raioPai,((raioPai*fator)/2)-Math.random()*fator*raioPai));
+           if(n==0) gg.add(filho1,filho2);
             p(300);
-           // circle.transform(new TColor(Color.black));
+            circle.transform(new TColor(Color.black));
             p(400);
+
             mitose(filho1,n-1,gg);
             mitose(filho2,n-1,gg);
+            remove(circle);
         }).start();
 
     }

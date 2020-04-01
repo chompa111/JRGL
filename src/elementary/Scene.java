@@ -5,20 +5,26 @@ import tranformations.TConvert;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.awt.image.FilteredImageSource;
+import java.awt.image.ImageProducer;
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Scene extends JFrame {
 
     List<Gobject> gobjects = new ArrayList<>();
-    Image image = new BufferedImage(900, 900, BufferedImage.TYPE_INT_RGB);
+    Image image = new BufferedImage(900, 900, BufferedImage.TYPE_INT_ARGB);
 
 
     public Scene() {
 
-        setSize(900, 900);
+        setUndecorated(true);
+
+        setSize(900, 1900);
+        setLocation(800,50);
         setVisible(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new Color(0,0,0,0));
 
         new Thread(() -> {
             while (true) {
@@ -64,9 +70,13 @@ public abstract class Scene extends JFrame {
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
 
+        g2.setBackground(new Color(255, 255, 255,0));
+        g2.clearRect(0,0,1000,1000);
+
+
         ((Graphics2D) g).setStroke(new BasicStroke(1.5f));
-        g.setColor(new Color(0, 0, 0));
-        g.fillRect(0, 0, 1700, 900);
+//        g.setColor(new Color(30, 0, 5));
+//        g.fillRect(0, 0, 1700, 900);
         for (int i = 0; i < gobjects.size(); i++) {
             gobjects.get(i).paint(g);
         }
@@ -74,9 +84,10 @@ public abstract class Scene extends JFrame {
 
     @Override
     public void paint(Graphics g) {
-
+        ((Graphics2D) g).setBackground(new Color(255, 255, 255,0));
+        ((Graphics2D) g).clearRect(0,0,1000,1000);
         paintComponent(image.getGraphics());
-        g.drawImage(image, 0, 0, this);
+       g.drawImage(image, 0, 0, this);
     }
 
      public <T extends Gobject> T convert(Gobject a, T b,int milis){
@@ -84,6 +95,7 @@ public abstract class Scene extends JFrame {
         p(milis+20);
         add(b);
         remove(a);
+        b.getsimpleBack();
         return b;
     }
 

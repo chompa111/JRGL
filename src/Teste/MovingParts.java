@@ -22,7 +22,7 @@ public class MovingParts extends Scene {
 
             mix(matrix.rectagles()[24][i], 20);
             mix(matrix.rectagles()[23][i], 20);
-            p(17);
+            p(2700);
         }
 
 
@@ -37,10 +37,10 @@ public class MovingParts extends Scene {
     void mix(Gobject gobject, int amount) {
         new Thread(() -> {
             for (int i = 0; i < amount; i++) {
-                p(170);
-                gobject.transform(new TMove(35, 0), 150);
-                p(170);
-                gobject.transform(new TMove(-35, 0), 150);
+                p(1700);
+                gobject.transform(new TMove(35, 0), 1500);
+                p(1700);
+                gobject.transform(new TMove(-35, 0), 1500);
             }
         }).start();
     }
