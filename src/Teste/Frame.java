@@ -37,11 +37,11 @@ public class Frame extends JFrame {
         gobjects.add(new FPSmesurer(550, 70));
         p(500);
 
-        Text batata= new Text("bman",200,200,25);
+        GText batata= new GText("bman",200,200,25);
         gobjects.add(batata);
         p(600);
-        Text frita= new Text("brunoYuji",200,200,25);
-        Text frita2= new Text("brunoYuji",200,200,25);
+        GText frita= new GText("brunoYuji",200,200,25);
+        GText frita2= new GText("brunoYuji",200,200,25);
         batata.transform(new TConvert(frita));
         p(600);
         gobjects.add(frita2);
@@ -54,9 +54,9 @@ public class Frame extends JFrame {
         gobjects.remove(frita2);
         p(1000);
 
-        circleN.transform(new TConvert(new Text("chompinha",200,200,25)),500);
+        circleN.transform(new TConvert(new GText("chompinha",200,200,25)),500);
         p(600);
-        Text chompinha=new Text("chompinha",200,200,25);
+        GText chompinha=new GText("chompinha",200,200,25);
         gobjects.add(chompinha);
         gobjects.remove(circleN);
         p(1000);
@@ -66,10 +66,10 @@ public class Frame extends JFrame {
         gobjects.add(matrix2);
         gobjects.remove(chompinha);
         p(2000);
-        matrix2.transform(new TConvert(new Text("f(x)=sin(x)+cos(3x)+ln(x)+log(8)",200,200,25)),500);
+        matrix2.transform(new TConvert(new GText("f(x)=sin(x)+cos(3x)+ln(x)+log(8)",200,200,25)),500);
         p(600);
         gobjects.remove(matrix2);
-        Text formula=new Text("f(x)=sin(x)+cos(3x)+ln(x)+log(10)",200,200,25);
+        GText formula=new GText("f(x)=sin(x)+cos(3x)+ln(x)+log(10)",200,200,25);
         gobjects.add(formula);
 
         GroupGobject grupo= new GroupGobject(new Circle(300,100,69,Color.white),

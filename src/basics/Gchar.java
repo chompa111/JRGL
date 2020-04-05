@@ -3,25 +3,23 @@ package basics;
 import elementary.ColorHolder;
 import elementary.Gobject;
 import elementary.Pin;
-import elementary.Segment;
 
 import java.awt.*;
 import java.awt.font.FontRenderContext;
 import java.awt.font.GlyphVector;
 import java.awt.geom.PathIterator;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Gchar extends SegmentableGobject {
     int size;
     char aChar;
-    Pin centerPin;
-    Shape shape;
+    public Pin centerPin;
+    public Shape shape;
 
 
     void completeShape(){
         FontRenderContext frc = new FontRenderContext(null, true, true);
-        GlyphVector glyphVector = Text.font.deriveFont((float) size).createGlyphVector(frc, aChar+"");
+        GlyphVector glyphVector = GText.font.deriveFont((float) size).createGlyphVector(frc, aChar+"");
          this.shape = glyphVector.getGlyphOutline(0);
     }
 
@@ -63,13 +61,13 @@ public class Gchar extends SegmentableGobject {
 
 
 
-    public Rectangle getBounds(){
+    public java.awt.Rectangle getBounds(){
         return shape.getBounds();
     }
 
     @Override
     public void paint(Graphics g) {
-        Rectangle rectangle=getBounds();
+        java.awt.Rectangle rectangle=getBounds();
 
         if (complexForm) {
             for (Gobject gobject:chields){
@@ -77,8 +75,8 @@ public class Gchar extends SegmentableGobject {
             }
         } else {
             g.setColor(color.color);
-            g.setFont(Text.font.deriveFont((float) size));
-            g.drawString(aChar + "", (int) centerPin.x-rectangle.x, (int) centerPin.y);
+            g.setFont(GText.font.deriveFont((float) size));
+            g.drawString(aChar + "", (int) centerPin.x-rectangle.x+3, (int) centerPin.y);
         }
     }
 }

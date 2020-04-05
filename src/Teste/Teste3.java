@@ -12,7 +12,7 @@ public class Teste3 extends Scene {
        // p(20000);
         add(new FPSmesurer(700,100));
         p(1200);
-          Text line =new Text("Guilherme_Bardeli",260,450,40);
+          GText line =new GText("Guilherme_Bardeli",260,450,40);
         add(line);
 
         p(1230);
@@ -22,8 +22,8 @@ public class Teste3 extends Scene {
         add(circle);
         remove(line);
         p(2000);
-        Text r6 =new Text("Hj_tem_R6?",300,450,40);
-        circle.transform(new TConvert(new Text("Hj_tem_R6?",300,450,40)),8000);
+        GText r6 =new GText("Hj_tem_R6?",300,450,40);
+        circle.transform(new TConvert(new GText("Hj_tem_R6?",300,450,40)),8000);
         p(8020);
         add(r6);
         remove(circle);

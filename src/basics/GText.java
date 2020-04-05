@@ -14,7 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Text extends Gobject {
+public class GText extends Gobject {
     static Font font;
     static{
         GraphicsEnvironment ge =
@@ -30,7 +30,7 @@ public class Text extends Gobject {
 
     }
 
-    public Text(String s,double x, double y,int size) {
+    public GText(String s, double x, double y, int size) {
         double xBasis=x;
         for(Character character: s.toCharArray()){
             Gchar gchar=new Gchar(character,xBasis,y,size);

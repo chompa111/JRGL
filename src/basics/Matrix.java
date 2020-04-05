@@ -10,7 +10,7 @@ public class Matrix extends Gobject {
         rectagles=new Rectangle[l][h];
         for(int i=0;i<l;i++){
             for(int j=0;j<h;j++){
-                Rectangle rectagle= new Rectangle(x+(i*30),y+(j*30),x+(i*30)+20,y+(j*30)+20,color);
+                Rectangle rectagle= new Rectangle(x+(i*20),y+(j*20),x+(i*20)+10,y+(j*20)+10,color);
                 chields.add(rectagle);
                 rectagles[i][j]=rectagle;
             }

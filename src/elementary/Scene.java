@@ -10,6 +10,9 @@ import java.awt.image.ImageProducer;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.awt.RenderingHints.KEY_RENDERING;
+import static java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_GASP;
+
 public abstract class Scene extends JFrame {
 
     List<Gobject> gobjects = new ArrayList<>();
@@ -84,7 +87,7 @@ public abstract class Scene extends JFrame {
 
     @Override
     public void paint(Graphics g) {
-        ((Graphics2D) g).setBackground(new Color(255, 255, 255,0));
+        ((Graphics2D) g).setBackground(new Color(0, 0, 0));
         ((Graphics2D) g).clearRect(0,0,1000,1000);
         paintComponent(image.getGraphics());
        g.drawImage(image, 0, 0, this);
@@ -96,6 +99,7 @@ public abstract class Scene extends JFrame {
         add(b);
         remove(a);
         b.getsimpleBack();
+        a.getsimpleBack();
         return b;
     }
 

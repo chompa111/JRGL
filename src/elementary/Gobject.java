@@ -135,4 +135,17 @@ public abstract class Gobject {
         }).start();
     }
 
+    public Pin midPin(){
+        List<Pin> positionalPins =getPositionalPins();
+        List<Pin> segmentPins = Pin.getPinsFromSegments(getSegments());
+        List<Pin> surfacePinsPins = getSurfacePins();
+
+        List<Pin> allPins= new ArrayList<>();
+        allPins.addAll(positionalPins);
+        allPins.addAll(segmentPins);
+        allPins.addAll(surfacePinsPins);
+
+        return Pin.midPin(allPins);
+    }
+
 }
