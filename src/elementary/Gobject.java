@@ -5,10 +5,13 @@ import tranformations.Transformation;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public abstract class Gobject {
 
+
+    public Gobject dad;
     public boolean complexForm=false;
     long id;
 
@@ -165,5 +168,20 @@ public abstract class Gobject {
 
         return new Rectangle(minimalPin.x,minimalPin.y,maxPin.x,maxPin.y,Color.orange);
     }
+    public void addChield(Gobject gobject){
+        gobject.dad=this;
+        chields.add(gobject);
+    }
+    public void addChield(Gobject... gobjects){
+        for (Gobject gobject:gobjects){
+            gobject.dad=this;
+        }
+        chields.addAll(Arrays.asList(gobjects));
+    }
 
+    public void unviculate(){
+        if(dad!=null){
+            dad.chields.remove(this);
+        }
+    }
 }

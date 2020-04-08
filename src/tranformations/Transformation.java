@@ -4,7 +4,7 @@ import elementary.Gobject;
 
 public abstract class Transformation {
 
-    public static final int STEPS=100;
+    public static final int STEPS=300;
 
     public void transform(Gobject go){
         transform(go,500);

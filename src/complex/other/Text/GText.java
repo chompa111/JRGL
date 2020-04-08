@@ -42,7 +42,7 @@ public class GText extends Gobject {
         basePin= new Pin(10000,10000);
         for(Character character: s.toCharArray()){
             Gchar gchar=new Gchar(character,xBasis,y,size);
-            chields.add(gchar);
+            addChield(gchar);
             xBasis+=gchar.getBounds().width+2;
         }
     }
@@ -52,7 +52,7 @@ public class GText extends Gobject {
         double xBasis=x;
         for(Character character: s.toCharArray()){
             Gchar gchar=new Gchar(character,xBasis,y,size);
-            chields.add(gchar);
+            addChield(gchar);
             xBasis+=gchar.getBounds().width+2;
         }
     }
@@ -62,7 +62,7 @@ public class GText extends Gobject {
         double xBasis=x;
         for(Character character: s.toCharArray()){
             Gchar gchar=new Gchar(character,xBasis,y,size,color);
-            chields.add(gchar);
+            addChield(gchar);
             xBasis+=gchar.getBounds().width+2;
         }
     }
@@ -80,7 +80,7 @@ public class GText extends Gobject {
         double deltay=basePin.y-text.basePin.y;
 
         new TMove(deltax,deltay).set(text);
-        chields.add(text);
+        addChield(text);
     }
 
     public void reformat(){

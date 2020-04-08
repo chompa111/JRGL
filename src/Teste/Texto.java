@@ -14,12 +14,16 @@ public class Texto extends Scene {
 
     @Override
     public void execute() {
+      add(new FPSmesurer(100,100));
       GText textoBase=new GText("f(x)=",150,450,50);
       add(textoBase);
-      GText  maldito=new GText("sin(x)+20",50);
+      GText  maldito=new GText("sin(x)+tan(i)",50);
       GText apendice= new GText("+cos(z)",50);
       textoBase.append(maldito);
       textoBase.append(apendice);
+      p(1000);
+      convert(textoBase.chields.get(0),new GText("g",150,450,50),300);
+
       p(3000);
 //        add(textoBase.getBorders());
 //        textoBase.chields.stream().forEach(c->add(c.getBorders()));
@@ -36,10 +40,10 @@ public class Texto extends Scene {
 
         GroupGobject numeros=new GroupGobject();
 
-        GText noventa= new GText("90",435,305,30,Color.black);
-        GText zero= new GText("0",610,450,30,Color.black);
-        GText centoEoitenta=new GText("180",250,450,30,Color.black);
-        GText duzentosEsetenta=new GText("270",420,630,30,Color.black);
+        GText noventa= new GText("90°",435,305,30,Color.black);
+        GText zero= new GText("0°",610,450,30,Color.black);
+        GText centoEoitenta=new GText("180°",250,450,30,Color.black);
+        GText duzentosEsetenta=new GText("270°",420,630,30,Color.black);
 
         numeros.add(noventa);
         numeros.add(zero);
@@ -47,14 +51,18 @@ public class Texto extends Scene {
         numeros.add(duzentosEsetenta);
 
         add(numeros);
-        convert(textoBase,gg,1200);
-        p(800);
+        convert(textoBase,gg,3200);
         numeros.transform(new TColor(Color.red),500);
 
         GroupGobject tudo= new GroupGobject();
         tudo.add(numeros,gg);
         p(2200);
-        tudo.transform(new TConvert(new Rectangle(310,310,570,570,Color.green)),2000);
+      tudo.transform(new TMove(-200,-200),700);
+      p(1000);
+      tudo.transform(new TMove(200,200),700);
+      p(1000);
+        tudo.transform(new TConvert(new Matrix(310,310,10,10,Color.green)),2000);
+
     }
 
     public static void main(String[] args) {

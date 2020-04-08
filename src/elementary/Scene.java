@@ -1,5 +1,6 @@
 package elementary;
 
+import basics.GroupGobject;
 import tranformations.TConvert;
 
 import javax.swing.*;
@@ -47,7 +48,14 @@ public abstract class Scene extends JFrame {
     }
 
     public void remove(Gobject gobject) {
-        gobjects.remove(gobject);
+        if(gobject.dad!=null){
+            gobject.unviculate();
+        }else{
+            gobjects.remove(gobject);
+        }
+        if (gobject instanceof GroupGobject) {
+            gobject.unviculate();
+        }
     }
 
     abstract public void execute();

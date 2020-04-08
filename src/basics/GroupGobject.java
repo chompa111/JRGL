@@ -23,5 +23,11 @@ public class GroupGobject extends Gobject {
         chields.addAll(gobjects);
     }
 
-
+    @Override
+    public void unviculate() {
+        super.unviculate();
+        for(Gobject gobject:chields){
+            gobject.unviculate();
+        }
+    }
 }
