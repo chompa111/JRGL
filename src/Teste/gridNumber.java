@@ -1,6 +1,8 @@
 package Teste;
 
 import basics.*;
+import complex.other.Text.GText;
+import complex.other.Text.Gchar;
 import elementary.Pin;
 import elementary.Scene;
 import tranformations.TColor;

@@ -1,6 +1,7 @@
 package Teste;
 
 import basics.*;
+import complex.other.Text.GText;
 import elementary.Scene;
 import tranformations.TConvert;
 

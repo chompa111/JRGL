@@ -38,18 +38,18 @@ public class TConvert extends Transformation {
         Pin minPinFromGobject=Pin.midPin(Pin.getPinsFromSegments(fromSeg));
         Pin minPinToGobject=Pin.midPin(Pin.getPinsFromSegments(toSeg));
 
-//        fromSeg.sort((seg1,seg2)->{
-//            Double V1=seg1.p1.x+seg1.p1.y+seg1.p2.x+seg1.p2.y;
-//            Double V2=seg2.p1.x+seg2.p1.y+seg2.p2.x+seg2.p2.y;
-//            return V1.compareTo(V2);
-//        });
-//        toSeg.sort((seg1,seg2)->{
-//            Double V1=seg1.p1.x+seg1.p1.y+seg1.p2.x+seg1.p2.y;
-//            Double V2=seg2.p1.x+seg2.p1.y+seg2.p2.x+seg2.p2.y;
-//            return V1.compareTo(V2);
-//        });
-        fromSeg.sort(Comparator.comparing(seg -> ang(minPinFromGobject, Pin.midPin(seg.p1, seg.p2))));
-        toSeg.sort(Comparator.comparing(seg -> ang(minPinToGobject, Pin.midPin(seg.p1, seg.p2))));
+        fromSeg.sort((seg1,seg2)->{
+            Double V1=seg1.p1.x+seg1.p1.y+seg1.p2.x+seg1.p2.y;
+            Double V2=seg2.p1.x+seg2.p1.y+seg2.p2.x+seg2.p2.y;
+            return V1.compareTo(V2);
+        });
+        toSeg.sort((seg1,seg2)->{
+            Double V1=seg1.p1.x+seg1.p1.y+seg1.p2.x+seg1.p2.y;
+            Double V2=seg2.p1.x+seg2.p1.y+seg2.p2.x+seg2.p2.y;
+            return V1.compareTo(V2);
+        });
+        //fromSeg.sort(Comparator.comparing(seg -> ang(minPinFromGobject, Pin.midPin(seg.p1, seg.p2))));
+        //toSeg.sort(Comparator.comparing(seg -> ang(minPinToGobject, Pin.midPin(seg.p1, seg.p2))));
         //fromSeg.sort(Comparator.comparing(Object::hashCode));
 
         List<ColorHolder> colors=fromSeg.stream().map(segment ->segment.color).collect(Collectors.toList());
@@ -135,6 +135,10 @@ public class TConvert extends Transformation {
         }).start();
     }
 
+    @Override
+    public void set(Gobject go) {
+
+    }
 
 
     Double ang(Pin p1, Pin p2){

@@ -59,4 +59,12 @@ public class TColor extends Transformation {
         }).start();
 
     }
+
+    @Override
+    public void set(Gobject go) {
+        List<ColorHolder> colors=go.getColors();
+        for (ColorHolder color : colors) {
+            color.set(finalColor);
+        }
+    }
 }

@@ -70,4 +70,9 @@ public class TSize extends Transformation{
 
         }).start();
     }
+
+    @Override
+    public void set(Gobject go) {
+
+    }
 }

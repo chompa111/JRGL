@@ -1,5 +1,7 @@
-package basics;
+package complex.other.Text;
 
+import basics.Line;
+import basics.SegmentableGobject;
 import elementary.ColorHolder;
 import elementary.Gobject;
 import elementary.Pin;
@@ -15,6 +17,8 @@ public class Gchar extends SegmentableGobject {
     char aChar;
     public Pin centerPin;
     public Shape shape;
+
+    ColorHolder colorHolder;
 
 
     void completeShape(){
@@ -50,6 +54,15 @@ public class Gchar extends SegmentableGobject {
         addPositionalPins(centerPin);
     }
 
+    public Gchar(char aChar, double x, double y, int size,Color color) {
+        centerPin = new Pin(x, y);
+        this.aChar = aChar;
+        this.size=size;
+        completeShape();
+        this.color=new ColorHolder(color);
+        addPositionalPins(centerPin);
+    }
+
     public Gchar(String s, double x, double y, int size) {
         centerPin = new Pin(x, y);
         aChar = s.charAt(0);
@@ -61,8 +74,14 @@ public class Gchar extends SegmentableGobject {
 
 
 
-    public java.awt.Rectangle getBounds(){
+    public Rectangle getBounds(){
         return shape.getBounds();
+    }
+
+    @Override
+    public basics.Rectangle getBorders() {
+        Rectangle base=getBounds();
+        return new basics.Rectangle(base.x+centerPin.x,base.y+centerPin.y,base.x+base.width+centerPin.x,base.y+base.height+centerPin.y,Color.orange);
     }
 
     @Override
@@ -79,4 +98,6 @@ public class Gchar extends SegmentableGobject {
             g.drawString(aChar + "", (int) centerPin.x-rectangle.x+3, (int) centerPin.y);
         }
     }
+
+
 }

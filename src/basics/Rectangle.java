@@ -8,8 +8,8 @@ import java.util.ArrayList;
 
 public class Rectangle extends SegmentableGobject {
 
-    Pin p1;
-    Pin p2;
+   public Pin p1;
+    public Pin p2;
 
     Line rightLine;
     Line leftLine;

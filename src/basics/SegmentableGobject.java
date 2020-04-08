@@ -58,7 +58,7 @@ public class SegmentableGobject extends Gobject {
         }
     }
 
-    void addPositionalPins(Pin... pins) {
+    public void addPositionalPins(Pin... pins) {
         if (positionalPins == null) positionalPins = new ArrayList<>();
         positionalPins.addAll(Arrays.asList(pins));
     }

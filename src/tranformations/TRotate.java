@@ -30,4 +30,9 @@ public class TRotate extends Transformation {
 
 
     }
+
+    @Override
+    public void set(Gobject go) {
+
+    }
 }

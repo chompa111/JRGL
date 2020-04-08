@@ -40,4 +40,15 @@ public class ColorHolder {
         this.green=g;
         this.blue=b;
     }
+
+    public void set(Color color){
+        this.color=color;
+        this.red=color.getRed();
+        this.green=color.getGreen();
+        this.blue=color.getBlue();
+    }
+
+    static Color randomColor(){
+        return new Color((int)(240*Math.random()),(int)(240*Math.random()),(int)(240*Math.random()));
+    }
 }

@@ -10,4 +10,6 @@ public abstract class Transformation {
         transform(go,500);
     }
      public abstract void transform(Gobject go, int milis);
+
+    public abstract void set(Gobject go);
 }

@@ -1,5 +1,6 @@
 package elementary;
 
+import basics.Rectangle;
 import tranformations.Transformation;
 
 import java.awt.*;
@@ -48,8 +49,9 @@ public abstract class Gobject {
 
 
     public void paint(Graphics g){
-        for(Gobject child: this.chields){
-            child.paint(g);
+        List<Gobject> gobjects = this.chields;
+        for (int i = 0; i < gobjects.size(); i++) {
+             gobjects.get(i).paint(g);
         }
     }
 
@@ -146,6 +148,22 @@ public abstract class Gobject {
         allPins.addAll(surfacePinsPins);
 
         return Pin.midPin(allPins);
+    }
+
+    public Rectangle getBorders(){
+        List<Pin> positionalPins =getPositionalPins();
+        List<Pin> segmentPins = Pin.getPinsFromSegments(getSegments());
+        List<Pin> surfacePinsPins = getSurfacePins();
+
+        List<Pin> allPins= new ArrayList<>();
+        allPins.addAll(positionalPins);
+        allPins.addAll(segmentPins);
+        allPins.addAll(surfacePinsPins);
+
+        Pin minimalPin=Pin.minPin(allPins);
+        Pin maxPin=Pin.maxPin(allPins);
+
+        return new Rectangle(minimalPin.x,minimalPin.y,maxPin.x,maxPin.y,Color.orange);
     }
 
 }

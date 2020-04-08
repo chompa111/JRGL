@@ -1,11 +1,11 @@
 package Teste;
 
-import basics.Circle;
-import basics.FPSmesurer;
+import basics.*;
 import basics.Rectangle;
 import elementary.Scene;
-import basics.GText;
+import complex.other.Text.GText;
 import tranformations.TColor;
+import tranformations.TConvert;
 import tranformations.TMove;
 
 import java.awt.*;
@@ -14,32 +14,47 @@ public class Texto extends Scene {
 
     @Override
     public void execute() {
-        add(new FPSmesurer(500,120));
-       Circle circle= new Circle(500,500,120,Color.CYAN);
-       GText text=new GText("2πr",500-30,650,30);
-       circle.chields.add(text);
+      GText textoBase=new GText("f(x)=",150,450,50);
+      add(textoBase);
+      GText  maldito=new GText("sin(x)+20",50);
+      GText apendice= new GText("+cos(z)",50);
+      textoBase.append(maldito);
+      textoBase.append(apendice);
+      p(3000);
+//        add(textoBase.getBorders());
+//        textoBase.chields.stream().forEach(c->add(c.getBorders()));
+        p(250);
+        maldito.transform(new TColor(Color.magenta),1500);
+        maldito.transform( new TMove(0,250),1500);
+        p(3000);
+       // textoBase.chields.remove(maldito);
+        //textoBase.reformat();
+        GroupGobject gg= new GroupGobject();
+        gg.add(new Circle(450,450,120,Color.orange));
+        gg.add(new Line(450,310,450,600,Color.white));
+        gg.add(new Line(310,450,600,450,Color.white));
 
-       add(circle);
+        GroupGobject numeros=new GroupGobject();
 
-       p(2000);
-       text.chields.get(1).transform(new TColor(Color.green));
-        text.chields.get(2).transform(new TColor(Color.orange));
+        GText noventa= new GText("90",435,305,30,Color.black);
+        GText zero= new GText("0",610,450,30,Color.black);
+        GText centoEoitenta=new GText("180",250,450,30,Color.black);
+        GText duzentosEsetenta=new GText("270",420,630,30,Color.black);
 
+        numeros.add(noventa);
+        numeros.add(zero);
+        numeros.add(centoEoitenta);
+        numeros.add(duzentosEsetenta);
 
+        add(numeros);
+        convert(textoBase,gg,1200);
+        p(800);
+        numeros.transform(new TColor(Color.red),500);
 
-       p(2000);
-       circle.transform(new TMove(-300,-100),1000);
-       p(5000);
-
-       Rectangle rectangle=convert(circle,new Rectangle(300,300,500,500,Color.red),2000);
-       p(3000);
-        Circle circle2= new Circle(400,400,120,Color.green);
-        GText text2=new GText("batata",400-30,550,30);
-        circle2.chields.add(text2);
-
-       convert(rectangle,circle2,1000);
-       p(3000);
-       convert(circle2,circle,1000);
+        GroupGobject tudo= new GroupGobject();
+        tudo.add(numeros,gg);
+        p(2200);
+        tudo.transform(new TConvert(new Rectangle(310,310,570,570,Color.green)),2000);
     }
 
     public static void main(String[] args) {

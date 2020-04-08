@@ -76,6 +76,27 @@ public class TMove extends Transformation {
         }).start();
     }
 
+    @Override
+    public void set(Gobject go) {
+
+        List<Pin> positionalPins = go.getPositionalPins();
+        List<Pin> segmentPins = Pin.getPinsFromSegments(go.getSegments());
+        List<Pin> surfacePinsPins = go.getSurfacePins();
+
+            for (Pin pin : positionalPins) {
+                pin.x += l;
+                pin.y += h;
+            }
+            for (Pin pin : segmentPins) {
+                pin.x += l;
+                pin.y += h;
+            }
+            for (Pin pin : surfacePinsPins) {
+                pin.x += l;
+                pin.y += h;
+            }
+    }
+
     public void transform(List<Pin> pins, int milis) {
 
         new Thread(() -> {
