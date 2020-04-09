@@ -14,15 +14,15 @@ public class Texto extends Scene {
 
     @Override
     public void execute() {
-      add(new FPSmesurer(100,100));
+  //    add(new FPSmesurer(100,100));
       GText textoBase=new GText("f(x)=",150,450,50);
-      add(textoBase);
       GText  maldito=new GText("sin(x)+tan(i)",50);
       GText apendice= new GText("+cos(z)",50);
       textoBase.append(maldito);
       textoBase.append(apendice);
+      include(textoBase);
       p(1000);
-      convert(textoBase.chields.get(0),new GText("g",150,450,50),300);
+  //    convert(textoBase.chields.get(0),new GText("g",150,450,50),300);
 
       p(3000);
 //        add(textoBase.getBorders());
@@ -40,19 +40,18 @@ public class Texto extends Scene {
 
         GroupGobject numeros=new GroupGobject();
 
-        GText noventa= new GText("90°",435,305,30,Color.black);
-        GText zero= new GText("0°",610,450,30,Color.black);
-        GText centoEoitenta=new GText("180°",250,450,30,Color.black);
-        GText duzentosEsetenta=new GText("270°",420,630,30,Color.black);
+        GText noventa= new GText("90°",435,305,30,Color.white);
+        GText zero= new GText("0°",610,450,30,Color.white);
+        GText centoEoitenta=new GText("180°",250,450,30,Color.white);
+        GText duzentosEsetenta=new GText("270°",420,630,30,Color.white);
 
         numeros.add(noventa);
         numeros.add(zero);
         numeros.add(centoEoitenta);
         numeros.add(duzentosEsetenta);
 
-        add(numeros);
-        convert(textoBase,gg,3200);
-        numeros.transform(new TColor(Color.red),500);
+        convert(textoBase,gg,1200);
+        include(numeros);
 
         GroupGobject tudo= new GroupGobject();
         tudo.add(numeros,gg);
@@ -61,7 +60,9 @@ public class Texto extends Scene {
       p(1000);
       tudo.transform(new TMove(200,200),700);
       p(1000);
-        tudo.transform(new TConvert(new Matrix(310,310,10,10,Color.green)),2000);
+      emphasize(tudo);
+      p(1000);
+     takeOut(tudo);
 
     }
 

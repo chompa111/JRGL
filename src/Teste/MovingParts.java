@@ -22,7 +22,7 @@ public class MovingParts extends Scene {
 
             mix(matrix.rectagles()[24][i], 20);
             mix(matrix.rectagles()[23][i], 20);
-            p(2700);
+            p(270);
         }
 
 

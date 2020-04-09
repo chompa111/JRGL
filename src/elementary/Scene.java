@@ -1,6 +1,8 @@
 package elementary;
 
 import basics.GroupGobject;
+import saveStateObjects.ColorSave;
+import tranformations.TColor;
 import tranformations.TConvert;
 
 import javax.swing.*;
@@ -81,11 +83,11 @@ public abstract class Scene extends JFrame {
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
 
-        g2.setBackground(new Color(255, 255, 255,0));
-        g2.clearRect(0,0,1000,1000);
+        ((Graphics2D) g).setBackground(new Color(3, 37, 78));
+        ((Graphics2D) g).clearRect(0,0,1000,1000);
 
 
-        ((Graphics2D) g).setStroke(new BasicStroke(1.5f));
+        ((Graphics2D) g).setStroke(new BasicStroke(2f));
 //        g.setColor(new Color(30, 0, 5));
 //        g.fillRect(0, 0, 1700, 900);
         for (int i = 0; i < gobjects.size(); i++) {
@@ -95,7 +97,7 @@ public abstract class Scene extends JFrame {
 
     @Override
     public void paint(Graphics g) {
-        ((Graphics2D) g).setBackground(new Color(0, 0, 0));
+        ((Graphics2D) g).setBackground(new Color(3, 37, 78));
         ((Graphics2D) g).clearRect(0,0,1000,1000);
         paintComponent(image.getGraphics());
        g.drawImage(image, 0, 0, this);
@@ -109,6 +111,31 @@ public abstract class Scene extends JFrame {
         b.getsimpleBack();
         a.getsimpleBack();
         return b;
+    }
+
+    public void emphasize(Gobject gobject){
+        ColorSave colorSave=ColorSave.getSaveFrom(gobject);
+
+        gobject.transform(new TColor(Color.orange),1000);
+        p(1100);
+
+        colorSave.transformBack(1000);
+        p(1000);
+    }
+
+    public void include(Gobject gobject){
+        ColorSave colorSave=ColorSave.getSaveFrom(gobject);
+        new TColor(new Color(0,0,0,0)).set(gobject);
+        add(gobject);
+        colorSave.transformBack();
+    }
+
+    public void takeOut(Gobject gobject){
+        ColorSave colorSave=ColorSave.getSaveFrom(gobject);
+        new TColor(new Color(0,0,0,0)).transform(gobject,1000);
+        p(1100);
+        remove(gobject);
+       // colorSave.transformBack();
     }
 
 }

@@ -58,6 +58,8 @@ public class initAnim extends Scene {
 
      //convert(gg1,new Circle(200+200,200+200,100,new Color(150,0,0)),1000);
      convert(gg2,new Circle(200+100+200,200+200,100,new Color(0,150,0)),1000);
+     emphasize(gg1);
+     takeOut(gg1);
 
 
     }

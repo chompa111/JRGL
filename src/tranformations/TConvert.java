@@ -57,11 +57,13 @@ public class TConvert extends Transformation {
         List<Double> acelerationRed=new ArrayList<>();
         List<Double> acelerationGreen=new ArrayList<>();
         List<Double> acelerationBlue=new ArrayList<>();
+        List<Double> acelerationAlpha=new ArrayList<>();
 
         for(int i=0;i<colors.size();i++){
             acelerationRed.add((4*(toSeg.get(i).color.color.getRed()-colors.get(i).color.getRed()+0.0))/(2*STEPS+(STEPS*STEPS)));
             acelerationGreen.add((4*(toSeg.get(i).color.color.getGreen()-colors.get(i).color.getGreen()+0.0))/(2*STEPS+(STEPS*STEPS)));
             acelerationBlue.add((4*(toSeg.get(i).color.color.getBlue()-colors.get(i).color.getBlue()+0.0))/(2*STEPS+(STEPS*STEPS)));
+            acelerationAlpha.add((4*(toSeg.get(i).color.color.getAlpha()-colors.get(i).color.getAlpha()+0.0))/(2*STEPS+(STEPS*STEPS)));
         }
 
         try {
@@ -102,7 +104,8 @@ public class TConvert extends Transformation {
                     fromPins.get(j).y+=i*acelerationY.get(j);
                 }
                 for(int j=0;j<size/2;j++){
-                    colors.get(j).change(i*acelerationRed.get(j),i*acelerationGreen.get(j),i*acelerationBlue.get(j));
+                    colors.get(j).change(i*acelerationRed.get(j),i*acelerationGreen.get(j),i*acelerationBlue.get(j),i*acelerationAlpha
+                    .get(j));
                 }
             }
 
@@ -118,7 +121,8 @@ public class TConvert extends Transformation {
 
                 }
                 for(int j=0;j<size/2;j++){
-                    colors.get(j).change(((STEPS/2)-i)*acelerationRed.get(j),((STEPS/2)-i)*acelerationGreen.get(j),((STEPS/2)-i)*acelerationBlue.get(j));
+                    colors.get(j).change(((STEPS/2)-i)*acelerationRed.get(j),((STEPS/2)-i)*acelerationGreen.get(j),((STEPS/2)-i)*acelerationBlue.get(j),i*acelerationAlpha
+                            .get(j));
                 }
             }
             //resolving aproxproblems

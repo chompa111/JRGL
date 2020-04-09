@@ -47,6 +47,10 @@ public class gridNumber extends Scene {
         p(3000);
         matrix.transform(new TSize(10),1000);
 
+        p(2000);
+
+        emphasize(matrix);
+
     }
 
     public static void main(String[] args) {
