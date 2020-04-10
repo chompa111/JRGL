@@ -18,16 +18,15 @@ public class SegmentableGobject extends Gobject {
 
     @Override
     public void fillColors(List<ColorHolder>colors) {
+
         if (!complexForm) {
             colors.add(color);
         } else {
             for (Segment segment:segments){
                 colors.add(segment.color);
             }
-            for(Gobject child:chields){
-                child.fillColors(colors);
-            }
         }
+        super.fillColors(colors);
     }
 
     @Override

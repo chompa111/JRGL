@@ -1,6 +1,8 @@
 package elementary;
 
 import basics.GroupGobject;
+import external.functions.Position;
+import javafx.geometry.Pos;
 import saveStateObjects.ColorSave;
 import tranformations.TColor;
 import tranformations.TConvert;
@@ -21,6 +23,9 @@ public abstract class Scene extends JFrame {
     List<Gobject> gobjects = new ArrayList<>();
     Image image = new BufferedImage(900, 900, BufferedImage.TYPE_INT_ARGB);
 
+
+    //auxiliar methods
+    public Position position= new Position(this);
 
     public Scene() {
 
@@ -56,7 +61,7 @@ public abstract class Scene extends JFrame {
             gobjects.remove(gobject);
         }
         if (gobject instanceof GroupGobject) {
-            gobject.unviculate();
+            ((GroupGobject) gobject).unviculate(this);
         }
     }
 
@@ -83,7 +88,7 @@ public abstract class Scene extends JFrame {
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
 
-        ((Graphics2D) g).setBackground(new Color(3, 37, 78));
+        ((Graphics2D) g).setBackground(new Color(0, 0, 0));
         ((Graphics2D) g).clearRect(0,0,1000,1000);
 
 
@@ -97,7 +102,7 @@ public abstract class Scene extends JFrame {
 
     @Override
     public void paint(Graphics g) {
-        ((Graphics2D) g).setBackground(new Color(3, 37, 78));
+        ((Graphics2D) g).setBackground(new Color(0, 0, 0));
         ((Graphics2D) g).clearRect(0,0,1000,1000);
         paintComponent(image.getGraphics());
        g.drawImage(image, 0, 0, this);
@@ -108,6 +113,7 @@ public abstract class Scene extends JFrame {
         p(milis+20);
         add(b);
         remove(a);
+        p(20);
         b.getsimpleBack();
         a.getsimpleBack();
         return b;

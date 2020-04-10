@@ -1,6 +1,7 @@
 package basics;
 
 import elementary.Gobject;
+import elementary.Scene;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -23,11 +24,17 @@ public class GroupGobject extends Gobject {
         chields.addAll(gobjects);
     }
 
-    @Override
-    public void unviculate() {
+
+    public void unviculate(Scene scene) {
         super.unviculate();
         for(Gobject gobject:chields){
-            gobject.unviculate();
+            if(gobject instanceof GroupGobject){
+                ((GroupGobject) gobject).unviculate(scene);
+            }else {
+                gobject.unviculate();
+                scene.remove(gobject);
+            }
         }
     }
+
 }

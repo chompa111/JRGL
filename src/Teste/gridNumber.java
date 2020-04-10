@@ -14,7 +14,7 @@ public class gridNumber extends Scene {
     @Override
     public void execute() {
         add(new FPSmesurer(100,100));
-        GText gText=new GText("t",300,600,700);
+        GText gText=new GText("2",300,600,700);
         Matrix matrix= new Matrix(300,100,23,28,new Color(0,130,0));
         add(gText);
         add(matrix);

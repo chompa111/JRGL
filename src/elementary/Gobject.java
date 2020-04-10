@@ -168,6 +168,7 @@ public abstract class Gobject {
 
         return new Rectangle(minimalPin.x,minimalPin.y,maxPin.x,maxPin.y,Color.orange);
     }
+
     public void addChield(Gobject gobject){
         gobject.dad=this;
         chields.add(gobject);

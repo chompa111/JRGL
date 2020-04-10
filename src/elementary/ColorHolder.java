@@ -26,9 +26,9 @@ public class ColorHolder {
         if(red>255)red=255;
         if(green>255)green=255;
         if(blue>255)blue=255;
-        if(alpha>253)alpha=255;
+        if(alpha>255)alpha=255;
 
-        color=new Color((int)red,(int)green,(int)blue,(int)alpha);
+        color=new Color((int)red,(int)green,(int)blue,(int)(alpha>240?250:alpha));
     }
     public ColorHolder(ColorHolder colorHolder){
         this.color=new Color(colorHolder.color.getRed(),colorHolder.color.getGreen(),colorHolder.color.getBlue(),colorHolder.color.getAlpha());

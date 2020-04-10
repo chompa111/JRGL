@@ -48,12 +48,13 @@ public class Rectangle extends SegmentableGobject {
         chields.add(rightLine);
         chields.add(bottomLine);
         chields.add(leftLine);
-        return 4;
+        return super.disassemble();
     }
 
 
     @Override
     public void paint(Graphics g) {
+        super.paint(g);
         if (complexForm) {
            for(int i=0;i<chields.size();i++){
                chields.get(i).paint(g);

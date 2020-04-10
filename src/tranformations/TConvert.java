@@ -48,9 +48,9 @@ public class TConvert extends Transformation {
 //            Double V2=seg2.p1.x+seg2.p1.y+seg2.p2.x+seg2.p2.y;
 //            return V1.compareTo(V2);
 //        });
-        fromSeg.sort(Comparator.comparing(seg -> ang(minPinFromGobject, Pin.midPin(seg.p1, seg.p2))));
-        toSeg.sort(Comparator.comparing(seg -> ang(minPinToGobject, Pin.midPin(seg.p1, seg.p2))));
-        //fromSeg.sort(Comparator.comparing(Object::hashCode));
+//        fromSeg.sort(Comparator.comparing(seg -> ang(minPinFromGobject, Pin.midPin(seg.p1, seg.p2))));
+//        toSeg.sort(Comparator.comparing(seg -> ang(minPinToGobject, Pin.midPin(seg.p1, seg.p2))));
+       fromSeg.sort(Comparator.comparing(Object::hashCode));
 
         List<ColorHolder> colors=fromSeg.stream().map(segment ->segment.color).collect(Collectors.toList());
 
